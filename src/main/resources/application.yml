@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  output:
+  ansi:
+    enabled: DETECT
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+  level:
+    root: ERROR
+    org.gradle: ERROR
+    io.spring: ERROR
+#    org:
+#      gradle: ERROR
+#      springframework: info
+#      hibernate:
+#        type: trace
