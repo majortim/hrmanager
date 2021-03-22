@@ -48,4 +48,9 @@ public class DepartmentsRepositoryTests {
         assertThat(departments.getDeptId()).isEqualTo(deptId);
         assertThat(departments.getDeptName()).isEqualTo(deptName);
     }
+
+    @Test
+    public void nothing(){
+        assertThat(1).isEqualTo(1);
+    }
 }
