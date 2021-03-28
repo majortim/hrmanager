@@ -27,6 +27,7 @@ logging:
     root: ERROR
     org.gradle: ERROR
     io.spring: ERROR
+    io.hurem: DEBUG
 #    org:
 #      gradle: ERROR
 #      springframework: info
