@@ -132,3 +132,6 @@ hs_err_pid*
 target/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,intellij,java-web
+
+#H2
+h2db.trace.db

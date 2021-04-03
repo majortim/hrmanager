@@ -1,17 +1,19 @@
-package io.hurem.domain.departments;
+package io.hurem.web.dto;
 
+import io.hurem.domain.departments.Departments;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Departments {
+public class DepartmentsSaveRequest {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "deptId")
     private Long deptId;
 
@@ -28,11 +30,20 @@ public class Departments {
     private String delYn;
 
     @Builder
-    public Departments(Long deptId, String deptName, Long managerId, String useYn, String delYn) {
+    public DepartmentsSaveRequest(Long deptId, String deptName, Long managerId, String useYn, String delYn) {
         this.deptId = deptId;
         this.deptName = deptName;
         this.managerId = managerId;
         this.useYn = useYn;
         this.delYn = delYn;
+    }
+
+    public Departments toEntity(){
+        return Departments.builder()
+                .deptId(deptId)
+                .deptName(deptName)
+                .useYn(useYn)
+                .delYn(delYn)
+                .build();
     }
 }
