@@ -14,36 +14,30 @@ import java.time.LocalDateTime;
 @Entity
 public class Employees {
     @Id
-    @Column(name = "empId")
     private Long empId;
 
-    @Column(name = "empName")
     private String empName;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "hireDate")
     private LocalDateTime hireDate;
 
-    @Column(name = "retireDate")
     private LocalDateTime retireDate;
 
     @ManyToOne
-    @JoinColumn(name = "jobId")
+    @JoinColumn(referencedColumnName = "job_id")
     private Jobs job;
 
     @ManyToOne
-    @JoinColumn(name = "deptId")
+    @JoinColumn
     private Departments dept;
 
-    @Column(name = "useYn", columnDefinition = "CHAR", length = 1)
+    @Column( columnDefinition = "CHAR", length = 1)
     private String useYn;
 
-    @Column(name = "delYn", columnDefinition = "CHAR", length = 1)
+    @Column(columnDefinition = "CHAR", length = 1)
     private String delYn;
 
     @Builder

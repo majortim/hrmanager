@@ -12,19 +12,16 @@ import javax.persistence.*;
 public class Departments {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "deptId")
     private Long deptId;
 
-    @Column(name = "deptName")
     private String deptName;
 
-    @Column(name = "managerId")
     private Long managerId;
 
-    @Column(name = "useYn", columnDefinition = "CHAR", length = 1)
+    @Column(columnDefinition = "CHAR", length = 1)
     private String useYn;
 
-    @Column(name = "delYn", columnDefinition = "CHAR", length = 1)
+    @Column(columnDefinition = "CHAR", length = 1)
     private String delYn;
 
     @Builder

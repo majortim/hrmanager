@@ -13,16 +13,14 @@ import javax.persistence.Id;
 @Entity
 public class Jobs {
     @Id
-    @Column(name = "jobId")
     private Long jobId;
 
-    @Column(name = "jobTitle")
     private String jobTitle;
 
-    @Column(name = "useYn", columnDefinition = "CHAR", length = 1)
+    @Column(columnDefinition = "CHAR", length = 1)
     private String useYn;
 
-    @Column(name = "delYn", columnDefinition = "CHAR", length = 1)
+    @Column(columnDefinition = "CHAR", length = 1)
     private String delYn;
 
     @Builder
