@@ -9,7 +9,11 @@ apply plugin: 'io.spring.dependency-management'
 
 group 'io.hurem'
 version '1.0-SNAPSHOT'
-//sourceCompatibility = '11'
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+ext['log4j2.version'] = '2.17.1'
 
 repositories {
     mavenCentral()

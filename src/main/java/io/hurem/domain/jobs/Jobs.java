@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,21 +12,17 @@ import javax.persistence.Id;
 @Entity
 public class Jobs {
     @Id
-    private Long jobId;
+    private Integer jobId;
 
     private String jobTitle;
 
-    @Column(columnDefinition = "CHAR", length = 1)
-    private String useYn;
-
-    @Column(columnDefinition = "CHAR", length = 1)
-    private String delYn;
+    public void updateJobs(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
 
     @Builder
-    public Jobs(Long jobId, String jobTitle, String useYn, String delYn) {
+    public Jobs(Integer jobId, String jobTitle) {
         this.jobId = jobId;
         this.jobTitle = jobTitle;
-        this.useYn = useYn;
-        this.delYn = delYn;
     }
 }

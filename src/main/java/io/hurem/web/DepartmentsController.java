@@ -13,7 +13,7 @@ public class DepartmentsController {
     private final DepartmentsService departmentsService;
 
     @PostMapping("/api/dept/save")
-    public Long save(@RequestBody DepartmentsSaveRequest requestDto){
+    public Integer save(@RequestBody DepartmentsSaveRequest requestDto){
         return departmentsService.save(requestDto);
     }
 }

@@ -41,46 +41,34 @@ public class DomainIntegrationTests {
     }
 
     public void saveDepartments() {
-        long deptId = 1L;
+        int deptId = 1;
         String deptName = "경영지원팀";
-        String useYn = "Y";
-        String delYn = "N";
 
         departmentsRepository.save(Departments.builder()
                 .deptId(deptId)
                 .deptName(deptName)
-                .useYn(useYn)
-                .delYn(delYn)
                 .build());
     }
 
     public void saveJobs() {
-        long jobId = 1L;
+        int jobId = 1;
         String jobTitle = "대리";
-        String useYn = "Y";
-        String delYn = "N";
 
         jobsRepository.save(Jobs.builder()
                 .jobId(jobId)
                 .jobTitle(jobTitle)
-                .useYn(useYn)
-                .delYn(delYn)
                 .build());
     }
 
     public void saveEmployees(Departments dept, Jobs job) {
-        long empId = 1L;
+        int empId = 1;
         String empName = "홍길동";
-        String useYn = "Y";
-        String delYn = "N";
 
         employeesRepository.save(Employees.builder()
                 .empId(empId)
                 .empName(empName)
                 .dept(dept)
                 .job(job)
-                .useYn(useYn)
-                .delYn(delYn)
                 .build());
     }
     @Transactional
@@ -89,12 +77,12 @@ public class DomainIntegrationTests {
         saveDepartments();
         saveJobs();
 
-        Departments department = departmentsRepository.getOne(1L);
-        Jobs job = jobsRepository.getOne(1L);
+        Departments department = departmentsRepository.getById(1);
+        Jobs job = jobsRepository.getById(1);
 
         saveEmployees(department, job);
 
-        Employees employee = employeesRepository.getOne(1L);
+        Employees employee = employeesRepository.getById(1);
 
         logger.debug("name: {}, dept: {}, job: {}", employee.getEmpName(), employee.getDept().getDeptName(), employee.getJob().getJobTitle());
     }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Employees {
     @Id
-    private Long empId;
+    private Integer empId;
 
     private String empName;
 
@@ -27,21 +27,15 @@ public class Employees {
     private LocalDateTime retireDate;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "job_id")
+    @JoinColumn(name = "job_id")
     private Jobs job;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "dept_id")
     private Departments dept;
 
-    @Column( columnDefinition = "CHAR", length = 1)
-    private String useYn;
-
-    @Column(columnDefinition = "CHAR", length = 1)
-    private String delYn;
-
     @Builder
-    public Employees(Long empId, String empName, String email, String phoneNumber, LocalDateTime hireDate, LocalDateTime retireDate, Jobs job, Departments dept, String useYn, String delYn) {
+    public Employees(Integer empId, String empName, String email, String phoneNumber, LocalDateTime hireDate, LocalDateTime retireDate, Jobs job, Departments dept) {
         this.empId = empId;
         this.empName = empName;
         this.email = email;
@@ -50,7 +44,5 @@ public class Employees {
         this.retireDate = retireDate;
         this.job = job;
         this.dept = dept;
-        this.useYn = useYn;
-        this.delYn = delYn;
     }
 }

@@ -12,24 +12,16 @@ import javax.persistence.*;
 public class Departments {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long deptId;
+    private Integer deptId;
 
     private String deptName;
 
     private Long managerId;
 
-    @Column(columnDefinition = "CHAR", length = 1)
-    private String useYn;
-
-    @Column(columnDefinition = "CHAR", length = 1)
-    private String delYn;
-
     @Builder
-    public Departments(Long deptId, String deptName, Long managerId, String useYn, String delYn) {
+    public Departments(Integer deptId, String deptName, Long managerId) {
         this.deptId = deptId;
         this.deptName = deptName;
         this.managerId = managerId;
-        this.useYn = useYn;
-        this.delYn = delYn;
     }
 }

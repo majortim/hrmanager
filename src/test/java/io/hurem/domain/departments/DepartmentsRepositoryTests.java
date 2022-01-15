@@ -29,18 +29,14 @@ public class DepartmentsRepositoryTests {
     @Test
     public void saveAndLoad() {
         //given
-        long deptId = 10L;
+        int deptId = 10;
         String deptName = "테스트 본문";
         long managerId = 100L;
-        String useYn = "Y";
-        String delYn = "N";
 
         departmentsRepository.save(Departments.builder()
                 .deptId(deptId)
                 .deptName(deptName)
                 .managerId(managerId)
-                .useYn(useYn)
-                .delYn(delYn)
                 .build());
 
         //when
