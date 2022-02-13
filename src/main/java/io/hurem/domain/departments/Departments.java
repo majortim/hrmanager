@@ -1,13 +1,13 @@
 package io.hurem.domain.departments;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@Builder(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
 @Entity
 public class Departments {
     @Id
@@ -17,11 +17,4 @@ public class Departments {
     private String deptName;
 
     private Long managerId;
-
-    @Builder
-    public Departments(Integer deptId, String deptName, Long managerId) {
-        this.deptId = deptId;
-        this.deptName = deptName;
-        this.managerId = managerId;
-    }
 }

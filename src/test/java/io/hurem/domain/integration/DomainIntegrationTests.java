@@ -7,6 +7,7 @@ import io.hurem.domain.employees.EmployeesRepository;
 import io.hurem.domain.jobs.Jobs;
 import io.hurem.domain.jobs.JobsRepository;
 
+import io.hurem.domain.salaries.SalaryParticulars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,7 @@ public class DomainIntegrationTests {
         saveEmployees(department, job);
 
         Employees employee = employeesRepository.getById(1);
+
 
         logger.debug("name: {}, dept: {}, job: {}", employee.getEmpName(), employee.getDept().getDeptName(), employee.getJob().getJobTitle());
     }

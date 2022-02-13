@@ -1,14 +1,14 @@
 package io.hurem.domain.jobs;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Getter
-@NoArgsConstructor
+@Builder(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
 @Entity
 public class Jobs {
     @Id
@@ -17,12 +17,6 @@ public class Jobs {
     private String jobTitle;
 
     public void updateJobs(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
-    @Builder
-    public Jobs(Integer jobId, String jobTitle) {
-        this.jobId = jobId;
         this.jobTitle = jobTitle;
     }
 }

@@ -2,15 +2,15 @@ package io.hurem.domain.employees;
 
 import io.hurem.domain.departments.Departments;
 import io.hurem.domain.jobs.Jobs;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
+@Builder(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
 @Entity
 public class Employees {
     @Id
@@ -26,23 +26,11 @@ public class Employees {
 
     private LocalDateTime retireDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id")
     private Jobs job;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dept_id")
     private Departments dept;
-
-    @Builder
-    public Employees(Integer empId, String empName, String email, String phoneNumber, LocalDateTime hireDate, LocalDateTime retireDate, Jobs job, Departments dept) {
-        this.empId = empId;
-        this.empName = empName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.hireDate = hireDate;
-        this.retireDate = retireDate;
-        this.job = job;
-        this.dept = dept;
-    }
 }
