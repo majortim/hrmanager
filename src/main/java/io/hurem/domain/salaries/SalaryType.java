@@ -10,8 +10,4 @@ public enum SalaryType {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return type;
-    }
 }

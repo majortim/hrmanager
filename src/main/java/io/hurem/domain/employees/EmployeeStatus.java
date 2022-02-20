@@ -10,8 +10,7 @@ import java.util.Objects;
 @Builder(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
-//@Table(name = "employee_status")
-//@Entity
+@Entity
 public class EmployeeStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
