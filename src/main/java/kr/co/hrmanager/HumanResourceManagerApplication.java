@@ -1,4 +1,4 @@
-package io.hurem;
+package kr.co.hrmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

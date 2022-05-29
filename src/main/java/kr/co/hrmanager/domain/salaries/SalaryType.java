@@ -9,5 +9,4 @@ public enum SalaryType {
     SalaryType(String type) {
         this.type = type;
     }
-
 }
