@@ -1,6 +1,6 @@
-package io.hurem.domain.tna;
+package kr.co.hrmanager.domain.tna;
 
-import io.hurem.domain.employees.Employees;
+import kr.co.hrmanager.domain.employees.Employees;
 import lombok.*;
 
 import javax.persistence.*;

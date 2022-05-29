@@ -1,7 +1,7 @@
-package io.hurem.service.departments;
+package kr.co.hrmanager.service.departments;
 
-import io.hurem.domain.departments.DepartmentsRepository;
-import io.hurem.web.dto.DepartmentsSaveRequest;
+import kr.co.hrmanager.domain.departments.DepartmentsRepository;
+import kr.co.hrmanager.web.dto.DepartmentsSaveRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

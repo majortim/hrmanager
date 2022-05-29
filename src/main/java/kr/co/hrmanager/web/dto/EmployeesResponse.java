@@ -1,4 +1,4 @@
-package io.hurem.web.dto;
+package kr.co.hrmanager.web.dto;
 
 import java.time.LocalDateTime;
 

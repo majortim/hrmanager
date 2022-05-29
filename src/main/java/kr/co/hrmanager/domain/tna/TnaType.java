@@ -1,4 +1,4 @@
-package io.hurem.domain.tna;
+package kr.co.hrmanager.domain.tna;
 
 public enum TnaType {
     DAY("휴가"),

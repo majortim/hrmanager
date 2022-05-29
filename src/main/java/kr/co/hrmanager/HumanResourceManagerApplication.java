@@ -3,8 +3,8 @@ package kr.co.hrmanager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
-public class HuremApplication {
+public class HumanResourceManagerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HuremApplication.class, args);
+        SpringApplication.run(HumanResourceManagerApplication.class, args);
     }
 }

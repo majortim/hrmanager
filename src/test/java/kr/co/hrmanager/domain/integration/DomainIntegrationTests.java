@@ -1,13 +1,13 @@
-package io.hurem.domain.integration;
+package kr.co.hrmanager.domain.integration;
 
-import io.hurem.domain.departments.Departments;
-import io.hurem.domain.departments.DepartmentsRepository;
-import io.hurem.domain.employees.Employees;
-import io.hurem.domain.employees.EmployeesRepository;
-import io.hurem.domain.jobs.Jobs;
-import io.hurem.domain.jobs.JobsRepository;
+import kr.co.hrmanager.domain.departments.Departments;
+import kr.co.hrmanager.domain.departments.DepartmentsRepository;
+import kr.co.hrmanager.domain.employees.Employees;
+import kr.co.hrmanager.domain.employees.EmployeesRepository;
+import kr.co.hrmanager.domain.jobs.Jobs;
+import kr.co.hrmanager.domain.jobs.JobsRepository;
 
-import io.hurem.domain.salaries.SalaryParticulars;
+import kr.co.hrmanager.domain.salaries.SalaryParticulars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
-package io.hurem.web;
+package kr.co.hrmanager.web;
 
-import io.hurem.domain.departments.Departments;
-import io.hurem.domain.departments.DepartmentsRepository;
-import io.hurem.web.dto.DepartmentsSaveRequest;
+import kr.co.hrmanager.domain.departments.Departments;
+import kr.co.hrmanager.domain.departments.DepartmentsRepository;
+import kr.co.hrmanager.web.dto.DepartmentsSaveRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

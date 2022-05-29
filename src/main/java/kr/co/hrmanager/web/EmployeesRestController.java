@@ -1,4 +1,4 @@
-package io.hurem.web;
+package kr.co.hrmanager.web;
 
 import org.springframework.web.bind.annotation.RestController;
 

@@ -7,7 +7,7 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 
-group 'io.hurem'
+group 'kr.co.hrmanager'
 version '1.0-SNAPSHOT'
 
 java {

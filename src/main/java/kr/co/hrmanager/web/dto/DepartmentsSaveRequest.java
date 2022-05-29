@@ -1,6 +1,6 @@
-package io.hurem.web.dto;
+package kr.co.hrmanager.web.dto;
 
-import io.hurem.domain.departments.Departments;
+import kr.co.hrmanager.domain.departments.Departments;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

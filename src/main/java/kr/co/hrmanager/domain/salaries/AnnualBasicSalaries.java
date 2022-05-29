@@ -1,6 +1,6 @@
-package io.hurem.domain.salaries;
+package kr.co.hrmanager.domain.salaries;
 
-import io.hurem.domain.employees.Employees;
+import kr.co.hrmanager.domain.employees.Employees;
 import lombok.*;
 
 import javax.persistence.*;

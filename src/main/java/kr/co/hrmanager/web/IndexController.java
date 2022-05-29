@@ -1,4 +1,4 @@
-package io.hurem.web;
+package kr.co.hrmanager.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

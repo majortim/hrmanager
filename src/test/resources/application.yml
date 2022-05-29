@@ -18,7 +18,7 @@ spring:
   sql:
     init:
       schema-locations:
-        - classpath:/sql/hurem-ddl.sql
+        - classpath:/sql/schema.sql
         - classpath:org/springframework/security/core/userdetails/jdbc/users.ddl
 #      data-locations: classpath:/sql/data.sql
       encoding: UTF-8
@@ -37,7 +37,7 @@ logging:
     root: ERROR
     org.gradle: ERROR
     io.spring: ERROR
-    io.hurem: DEBUG
+    kr.co.hrmanager: DEBUG
 #    org:
 #      gradle: ERROR
 #      springframework: info

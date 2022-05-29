@@ -1,4 +1,4 @@
-package io.hurem.domain.departments;
+package kr.co.hrmanager.domain.departments;
 
 import lombok.*;
 
