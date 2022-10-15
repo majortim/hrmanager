@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class DepartmentsSaveRequest {
-    private Integer deptId;
+    private Long deptId;
     private String deptName;
-    private Integer managerId;
+    private Long managerId;
 
 
     @Builder
-    public DepartmentsSaveRequest(Integer deptId, String deptName, Integer managerId) {
+    public DepartmentsSaveRequest(Long deptId, String deptName, Long managerId) {
         this.deptId = deptId;
         this.deptName = deptName;
         this.managerId = managerId;

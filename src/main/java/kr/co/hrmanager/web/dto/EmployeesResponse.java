@@ -3,7 +3,7 @@ package kr.co.hrmanager.web.dto;
 import java.time.LocalDateTime;
 
 public class EmployeesResponse {
-    private Integer empId;
+    private Long empId;
 
     private String empName;
 

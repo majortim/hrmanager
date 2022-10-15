@@ -13,7 +13,7 @@ public class DepartmentsService {
     private final DepartmentsRepository departmentsRepository;
 
     @Transactional
-    public Integer save(DepartmentsSaveRequest requestDto) {
+    public Long save(DepartmentsSaveRequest requestDto) {
         return departmentsRepository.save(requestDto.toEntity()).getDeptId();
     }
 }

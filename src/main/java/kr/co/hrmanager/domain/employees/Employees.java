@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Employees {
     @Id
-    private Integer empId;
+    private Long empId;
 
     private String empName;
 

@@ -42,7 +42,7 @@ public class DomainIntegrationTests {
     }
 
     public void saveDepartments() {
-        int deptId = 1;
+        Long deptId = 1L;
         String deptName = "경영지원팀";
 
         departmentsRepository.save(Departments.builder()
@@ -52,7 +52,7 @@ public class DomainIntegrationTests {
     }
 
     public void saveJobs() {
-        int jobId = 1;
+        Long jobId = 1L;
         String jobTitle = "대리";
 
         jobsRepository.save(Jobs.builder()
@@ -62,7 +62,7 @@ public class DomainIntegrationTests {
     }
 
     public void saveEmployees(Departments dept, Jobs job) {
-        int empId = 1;
+        Long empId = 1L;
         String empName = "홍길동";
 
         employeesRepository.save(Employees.builder()
@@ -78,12 +78,12 @@ public class DomainIntegrationTests {
         saveDepartments();
         saveJobs();
 
-        Departments department = departmentsRepository.getById(1);
-        Jobs job = jobsRepository.getById(1);
+        Departments department = departmentsRepository.getById(1L);
+        Jobs job = jobsRepository.getById(1L);
 
         saveEmployees(department, job);
 
-        Employees employee = employeesRepository.getById(1);
+        Employees employee = employeesRepository.getById(1L);
 
 
         logger.debug("name: {}, dept: {}, job: {}", employee.getEmpName(), employee.getDept().getDeptName(), employee.getJob().getJobTitle());

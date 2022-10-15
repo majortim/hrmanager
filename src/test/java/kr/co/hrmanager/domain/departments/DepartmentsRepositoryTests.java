@@ -29,9 +29,9 @@ public class DepartmentsRepositoryTests {
     @Test
     public void saveAndLoad() {
         //given
-        int deptId = 10;
-        String deptName = "테스트 본문";
-        long managerId = 100L;
+        Long deptId = 10L;
+        String deptName = "테스트 부서명";
+        Long managerId = 100L;
 
         departmentsRepository.save(Departments.builder()
                 .deptId(deptId)

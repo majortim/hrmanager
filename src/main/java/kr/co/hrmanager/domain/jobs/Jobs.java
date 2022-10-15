@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Entity
 public class Jobs {
     @Id
-    private Integer jobId;
+    private Long jobId;
 
     private String jobTitle;
 

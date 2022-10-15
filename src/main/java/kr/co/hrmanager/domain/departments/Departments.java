@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Departments {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer deptId;
+    private Long deptId;
 
     private String deptName;
 

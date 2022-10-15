@@ -36,7 +36,7 @@ public class DepartmentsControllerTest {
 
     @Test
     public void saveTest(){
-        int deptId = 1;
+        Long deptId = 1L;
         String deptName = "경영지원팀";
 
         DepartmentsSaveRequest request = DepartmentsSaveRequest.builder()
