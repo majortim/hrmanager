@@ -78,12 +78,12 @@ public class DomainIntegrationTests {
         saveDepartments();
         saveJobs();
 
-        Departments department = departmentsRepository.getById(1L);
-        Jobs job = jobsRepository.getById(1L);
+        Departments department = departmentsRepository.getReferenceById(1L);
+        Jobs job = jobsRepository.getReferenceById(1L);
 
         saveEmployees(department, job);
 
-        Employees employee = employeesRepository.getById(1L);
+        Employees employee = employeesRepository.getReferenceById(1L);
 
 
         logger.debug("name: {}, dept: {}, job: {}", employee.getEmpName(), employee.getDept().getDeptName(), employee.getJob().getJobTitle());

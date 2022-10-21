@@ -21,7 +21,7 @@ spring:
       schema-locations:
         - classpath:/sql/schema.sql
 #        - classpath:org/springframework/security/core/userdetails/jdbc/users.ddl
-#      data-locations: classpath:/sql/data.sql
+      data-locations: classpath:/sql/data.sql
       encoding: UTF-8
   h2:
     console:
@@ -44,3 +44,10 @@ logging:
 #      springframework: info
 #      hibernate:
 #        type: trace
+
+
+jwt:
+  private:
+    key: classpath:/key/app.key
+  public:
+    key: classpath:/key/app.pub

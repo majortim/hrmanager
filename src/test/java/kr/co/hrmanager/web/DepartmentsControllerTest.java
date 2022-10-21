@@ -1,30 +1,37 @@
 package kr.co.hrmanager.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.hrmanager.domain.departments.Departments;
 import kr.co.hrmanager.domain.departments.DepartmentsRepository;
 import kr.co.hrmanager.web.dto.DepartmentsSaveRequest;
-import static org.assertj.core.api.Assertions.assertThat;
+import kr.co.hrmanager.web.dto.users.LoginRequest;
+import kr.co.hrmanager.web.dto.users.LoginResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
+import java.util.Optional;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@Slf4j
+@SpringBootTest
+@AutoConfigureMockMvc
 public class DepartmentsControllerTest {
-    @LocalServerPort
-    private int port;
-
     @Autowired
-    private TestRestTemplate restTemplate;
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     private DepartmentsRepository departmentsRepository;
@@ -34,24 +41,53 @@ public class DepartmentsControllerTest {
         departmentsRepository.deleteAll();
     }
 
+
     @Test
     public void saveTest(){
         Long deptId = 1L;
         String deptName = "경영지원팀";
+
+        LoginRequest loginRequest = LoginRequest.builder()
+                .username("admin")
+                .password("test123!")
+                .build();
 
         DepartmentsSaveRequest request = DepartmentsSaveRequest.builder()
                 .deptId(deptId)
                 .deptName(deptName)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/dept/save";
+        try {
+            String loginRequestAsString = objectMapper.writeValueAsString(loginRequest);
+            String content = objectMapper.writeValueAsString(request);
 
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, request, Long.class);
+            String responseText = this.mockMvc.perform(
+                    post("/login")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(loginRequestAsString)
+            ).andReturn().getResponse().getContentAsString();
 
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+            log.debug("response: {}", responseText);
 
-        List<Departments> list = departmentsRepository.findAll();
-        assertThat(list.get(0).getDeptName()).isEqualTo(deptName);
+            LoginResponse loginResponse = Optional.of(objectMapper.readValue(responseText, LoginResponse.class)).orElseThrow();
+
+            ResultActions actions = this.mockMvc.perform(
+                    post("/api/dept/save")
+                            .header("Authorization", "Bearer " + loginResponse.getToken())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(content)
+//                            .accept(MediaType.APPLICATION_JSON)
+            );
+
+            actions.andExpect(status().isOk())
+                    .andExpect(content().string("1"));
+
+            List<Departments> list = departmentsRepository.findAll();
+            assertThat(list.get(0).getDeptName()).isEqualTo(deptName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }

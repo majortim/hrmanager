@@ -1,12 +1,12 @@
 package kr.co.hrmanager.web.dto;
 
 import kr.co.hrmanager.domain.departments.Departments;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+
+@NoArgsConstructor
 
 @Getter
-@NoArgsConstructor
 public class DepartmentsSaveRequest {
     private Long deptId;
     private String deptName;
