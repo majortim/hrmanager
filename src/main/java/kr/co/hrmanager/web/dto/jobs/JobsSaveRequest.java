@@ -1,6 +1,5 @@
 package kr.co.hrmanager.web.dto.jobs;
 
-import kr.co.hrmanager.domain.departments.Departments;
 import kr.co.hrmanager.domain.jobs.Jobs;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
