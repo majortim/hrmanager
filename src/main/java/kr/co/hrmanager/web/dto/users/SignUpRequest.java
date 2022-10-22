@@ -18,11 +18,4 @@ public class SignUpRequest {
     @NotNull(message = "비밀번호를 입력해주세요.")
     @Size(min = 8, max = 90, message = "비밀번호는 8자 이상 90자 이내여야 합니다.")
     private String password;
-    @NotNull(message = "이름을 입력해주세요.")
-    @Size(max = 30, message = "이름은 30자 이내여아합니다.")
-    private String name;
-    @NotNull(message = "주민등록번호를 입력해주세요.")
-    @Size(max = 14, message = "주민등록번호는 13자 이내여아합니다.")
-    @Pattern(regexp = "^([\\d]{6})-([\\d]{6,7})$", message = "주민등록번호의 형식을 올바르게 입력해주세요. 예) 010101-4001004")
-    private String regNo;
 }

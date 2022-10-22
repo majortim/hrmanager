@@ -8,4 +8,4 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @AuthenticationPrincipal(expression = "@userDetailsService.loadUserByUsername(#this.subject)")
-public @interface User {}
+public @interface PrincipalUser {}

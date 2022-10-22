@@ -32,6 +32,7 @@ public class UsersController {
 
     private final AuthenticationManager authenticationManager;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signup")
     public PostSuccessResponse signup(@Valid @RequestBody SignUpRequest request) {
 
@@ -45,7 +46,6 @@ public class UsersController {
         return new PostSuccessResponse("회원가입이 완료됐습니다.");
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/login")
     public LoginResponse login(@Valid @RequestBody LoginRequest request) {
         try {

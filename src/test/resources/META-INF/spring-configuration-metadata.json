@@ -1,0 +1,13 @@
+{
+  "properties" : [
+    {
+      "name": "jwt.private.key",
+      "description" : "JWT 개인키"
+
+    },
+    {
+      "name": "jwt.public.key",
+      "description" : "JWT 공개키"
+    }
+  ]
+}

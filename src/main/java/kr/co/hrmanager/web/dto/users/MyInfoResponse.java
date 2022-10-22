@@ -1,13 +1,12 @@
 package kr.co.hrmanager.web.dto.users;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Getter
 public class MyInfoResponse {
-    private final String userId;
-    private final String name;
+    private String username;
+    private String name;
 }

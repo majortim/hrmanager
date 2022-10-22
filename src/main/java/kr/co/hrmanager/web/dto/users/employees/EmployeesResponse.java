@@ -14,6 +14,10 @@ public class EmployeesResponse {
 
     private String empName;
 
+    private String department;
+
+    private String job;
+
     private String email;
 
     private String phoneNumber;

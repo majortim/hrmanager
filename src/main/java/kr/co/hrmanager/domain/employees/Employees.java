@@ -16,6 +16,14 @@ public class Employees {
     @Id
     private Long empId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dept_id")
+    private Departments dept;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_id")
+    private Jobs job;
+
     private String empName;
 
     private String email;
@@ -25,12 +33,4 @@ public class Employees {
     private LocalDateTime hireDt;
 
     private LocalDateTime retireDt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id")
-    private Jobs job;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dept_id")
-    private Departments dept;
 }

@@ -5,20 +5,13 @@ import lombok.*;
 
 
 @NoArgsConstructor
-
+@AllArgsConstructor
+@Builder
 @Getter
 public class DepartmentsSaveRequest {
     private Long deptId;
     private String deptName;
     private Long managerId;
-
-
-    @Builder
-    public DepartmentsSaveRequest(Long deptId, String deptName, Long managerId) {
-        this.deptId = deptId;
-        this.deptName = deptName;
-        this.managerId = managerId;
-    }
 
     public Departments toEntity(){
         return Departments.builder()
