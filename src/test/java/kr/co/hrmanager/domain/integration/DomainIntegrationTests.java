@@ -6,17 +6,14 @@ import kr.co.hrmanager.domain.employees.Employees;
 import kr.co.hrmanager.domain.employees.EmployeesRepository;
 import kr.co.hrmanager.domain.jobs.Jobs;
 import kr.co.hrmanager.domain.jobs.JobsRepository;
-
-import kr.co.hrmanager.domain.salaries.SalaryParticulars;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.transaction.Transactional;
 

@@ -22,9 +22,9 @@ public class Employees {
 
     private String phoneNumber;
 
-    private LocalDateTime hireDate;
+    private LocalDateTime hireDt;
 
-    private LocalDateTime retireDate;
+    private LocalDateTime retireDt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id")

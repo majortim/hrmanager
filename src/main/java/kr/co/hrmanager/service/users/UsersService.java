@@ -13,10 +13,6 @@ public class UsersService {
     private final UsersRepository usersRepository;
     private final AuthRepository authRepository;
 
-    public Users findById(String userId) {
-        return usersRepository.findById(userId).orElse(null);
-    }
-
     @Transactional
     public void saveUser(Users user) {
         usersRepository.findById(user.getUsername()).ifPresent(u -> { throw new DuplicateKeyException("중복되는 ID 입니다."); });

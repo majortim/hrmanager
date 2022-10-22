@@ -1,5 +1,8 @@
 package kr.co.hrmanager.domain.employees;
 
+import lombok.Getter;
+
+@Getter
 public enum EmployeeStatusType {
     PRESENT("재직"),
     ABSENT("일반휴직"),

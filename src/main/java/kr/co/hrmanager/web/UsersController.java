@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +58,7 @@ public class UsersController {
             log.debug("authentication: {}", authentication);
             log.debug("token: {}", authentication != null ? jwtService.getToken(authentication) : "");
 
-            return new LoginResponse(jwtService.getToken(authentication));
+            return new LoginResponse(jwtService.getToken(Objects.requireNonNull(authentication)));
         } catch (AuthenticationException e) {
             log.error("인증 실패", e);
             throw e;

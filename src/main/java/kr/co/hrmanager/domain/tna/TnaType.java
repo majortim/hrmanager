@@ -1,5 +1,8 @@
 package kr.co.hrmanager.domain.tna;
 
+import lombok.Getter;
+
+@Getter
 public enum TnaType {
     DAY("휴가"),
     MORNING("오전 반차"),

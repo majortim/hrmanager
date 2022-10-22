@@ -17,7 +17,7 @@ public class AnnualBasicSalaries {
     private Long absId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emp_id")
+    //@JoinColumn(referencedColumnName  = "emp_id")
     private Employees employee;
     private Long year;
     private Long salary;

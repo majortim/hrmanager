@@ -45,7 +45,6 @@ logging:
 #      hibernate:
 #        type: trace
 
-
 jwt:
   private:
     key: classpath:/key/app.key

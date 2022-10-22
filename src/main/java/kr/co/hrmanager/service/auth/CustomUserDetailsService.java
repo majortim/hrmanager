@@ -1,6 +1,5 @@
 package kr.co.hrmanager.service.auth;
 
-import kr.co.hrmanager.domain.users.Users;
 import kr.co.hrmanager.domain.users.UsersRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
