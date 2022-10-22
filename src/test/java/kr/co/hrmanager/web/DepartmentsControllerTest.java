@@ -3,7 +3,7 @@ package kr.co.hrmanager.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.hrmanager.domain.departments.Departments;
 import kr.co.hrmanager.domain.departments.DepartmentsRepository;
-import kr.co.hrmanager.web.dto.DepartmentsSaveRequest;
+import kr.co.hrmanager.web.dto.departments.DepartmentsSaveRequest;
 import kr.co.hrmanager.web.dto.users.LoginRequest;
 import kr.co.hrmanager.web.dto.users.LoginResponse;
 import lombok.extern.slf4j.Slf4j;

@@ -19,7 +19,7 @@ import javax.transaction.Transactional;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class DomainIntegrationTests {
+public class DomainIntegrationTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired

@@ -1,7 +1,7 @@
 package kr.co.hrmanager.web;
 
 import kr.co.hrmanager.service.departments.DepartmentsService;
-import kr.co.hrmanager.web.dto.DepartmentsSaveRequest;
+import kr.co.hrmanager.web.dto.departments.DepartmentsSaveRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

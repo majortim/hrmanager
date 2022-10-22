@@ -1,7 +1,7 @@
 package kr.co.hrmanager.service.departments;
 
 import kr.co.hrmanager.domain.departments.DepartmentsRepository;
-import kr.co.hrmanager.web.dto.DepartmentsSaveRequest;
+import kr.co.hrmanager.web.dto.departments.DepartmentsSaveRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

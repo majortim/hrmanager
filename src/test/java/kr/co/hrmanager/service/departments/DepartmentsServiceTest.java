@@ -1,6 +1,6 @@
 package kr.co.hrmanager.service.departments;
 
-import kr.co.hrmanager.web.dto.DepartmentsSaveRequest;
+import kr.co.hrmanager.web.dto.departments.DepartmentsSaveRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest
-class DepartmentsServiceTests {
+class DepartmentsServiceTest {
 
     @Autowired
     DepartmentsService departmentsService;
@@ -23,8 +23,8 @@ class DepartmentsServiceTests {
                 .deptName("경영지원팀")
                 .build();
 
-        Long savedCount = departmentsService.save(request);
+        Long savedId = departmentsService.save(request);
 
-        assertEquals(1L, savedCount);
+        assertEquals(1L, savedId);
     }
 }

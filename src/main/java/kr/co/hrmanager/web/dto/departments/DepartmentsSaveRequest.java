@@ -1,4 +1,4 @@
-package kr.co.hrmanager.web.dto;
+package kr.co.hrmanager.web.dto.departments;
 
 import kr.co.hrmanager.domain.departments.Departments;
 import lombok.*;

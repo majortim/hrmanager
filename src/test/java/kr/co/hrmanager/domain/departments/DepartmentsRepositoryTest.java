@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class DepartmentsRepositoryTests {
+public class DepartmentsRepositoryTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
