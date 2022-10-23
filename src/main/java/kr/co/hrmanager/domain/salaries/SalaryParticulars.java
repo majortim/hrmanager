@@ -5,10 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Getter
-@Builder(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED, staticName = "of")
+@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@Builder(access = AccessLevel.PUBLIC)
+@Getter
 @Entity
 public class SalaryParticulars {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

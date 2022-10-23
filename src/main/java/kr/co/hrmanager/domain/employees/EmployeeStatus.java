@@ -6,10 +6,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Getter
-@Builder(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@Builder(access = AccessLevel.PUBLIC)
+@Getter
 @Entity
 @Table(name = "employee_status")
 public class EmployeeStatus {

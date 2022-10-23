@@ -4,11 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@Builder(access = AccessLevel.PUBLIC)
 @Getter
+@Entity
 public class Authorities {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,10 +7,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Getter
-@Builder(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@Builder(access = AccessLevel.PUBLIC)
+@Getter
 @Entity
 public class Salaries {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

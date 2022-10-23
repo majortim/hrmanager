@@ -20,7 +20,7 @@ class JobsServiceTest {
     JobsService jobsService;
 
     @Test
-    void save() {
+    public void save() {
 
         Long savedId = saveCommon();
 
@@ -29,7 +29,7 @@ class JobsServiceTest {
 
     @Transactional
     @Test
-    void saveAndUpdate() {
+    public void saveAndUpdate() {
         Long savedId = saveCommon();
 
         Optional<Jobs> foundJob = jobsService.findById(savedId);

@@ -1,7 +1,6 @@
 package kr.co.hrmanager.domain.users;
 
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +14,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@Builder(access = AccessLevel.PUBLIC)
 @Getter
-@Slf4j
-
+@Entity
 public class Users implements UserDetails {
     @Id
     private String username;

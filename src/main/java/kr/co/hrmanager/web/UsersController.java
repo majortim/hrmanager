@@ -21,9 +21,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Objects;
 
-@RestController
-@RequiredArgsConstructor
+
 @Slf4j
+@RequiredArgsConstructor
+@RestController
 public class UsersController {
     private final UsersService usersService;
     private final PasswordEncoder passwordEncoder;

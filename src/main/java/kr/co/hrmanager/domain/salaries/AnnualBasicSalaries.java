@@ -6,10 +6,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Getter
 @Entity
 public class AnnualBasicSalaries {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
