@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
         // @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
@@ -36,7 +36,8 @@ public class SecurityConfig {
                 .headers().frameOptions().sameOrigin().and()
                 .httpBasic().disable()
                 .formLogin().disable()
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .userDetailsService(userDetailsService);
         // @formatter:on
         return http.build();
     }

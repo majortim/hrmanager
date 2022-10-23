@@ -2,6 +2,7 @@ package kr.co.hrmanager.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.hrmanager.web.dto.users.LoginRequest;
+import kr.co.hrmanager.web.dto.users.LoginResponse;
 import kr.co.hrmanager.web.dto.users.SignUpRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.util.NestedServletException;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
@@ -33,7 +39,7 @@ class UsersControllerTest {
                 .password("test123!")
                 .build();
 
-       postLogin(request)
+       requestLogin(request)
                .andExpect(status().is2xxSuccessful());
     }
 
@@ -44,11 +50,43 @@ class UsersControllerTest {
                 .password("test123!!")
                 .build();
 
-        postLogin(request)
+        requestLogin(request)
                 .andExpect(status().is4xxClientError());
     }
 
-    private ResultActions postLogin(LoginRequest request) {
+    @Test
+    public void loginAndGetAuthorities() throws Exception {
+        LoginRequest loginRequest = LoginRequest.builder()
+                .username("admin")
+                .password("test123!")
+                .build();
+
+        ResultActions loginResultActions = requestLogin(loginRequest);
+
+        String loginResponseText
+                = Optional.of(loginResultActions.andReturn().getResponse().getContentAsString())
+                            .orElseThrow(()-> new RuntimeException("로그인 실패.."));
+
+        log.debug("response: {}", loginResponseText);
+
+        LoginResponse loginResponse = Optional.of(objectMapper.readValue(loginResponseText, LoginResponse.class)).orElseThrow();
+
+        ResultActions authoritiesResultActions = this.mockMvc.perform(
+                get("/authorities")
+                        .header("Authorization", "Bearer " + loginResponse.getToken())
+//                            .accept(MediaType.APPLICATION_JSON)
+        );
+
+        authoritiesResultActions
+                .andExpect(jsonPath("$..authority").isNotEmpty())
+                .andExpect(jsonPath("$[0].authority").value("ROLE_ADMIN"))
+                .andExpect(status().isOk());
+
+        String authoritiesResponseAsString = Optional.of(authoritiesResultActions.andReturn().getResponse().getContentAsString()).orElseThrow();
+        log.debug("authoritiesResponseAsString: {}", authoritiesResponseAsString);
+    }
+
+    private ResultActions requestLogin(LoginRequest request) {
 
         try {
             String content = objectMapper.writeValueAsString(request);
