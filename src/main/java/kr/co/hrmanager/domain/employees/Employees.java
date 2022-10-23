@@ -2,6 +2,7 @@ package kr.co.hrmanager.domain.employees;
 
 import kr.co.hrmanager.domain.departments.Departments;
 import kr.co.hrmanager.domain.jobs.Jobs;
+import kr.co.hrmanager.domain.users.Users;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,12 +10,16 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
-@Builder(access = AccessLevel.PUBLIC)
+@Builder
 @Getter
 @Entity
 public class Employees {
     @Id
     private Long empId;
+
+    @OneToOne
+    @JoinColumn(name = "username")
+    private Users user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dept_id")

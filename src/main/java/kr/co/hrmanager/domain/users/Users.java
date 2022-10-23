@@ -16,13 +16,15 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
-@Builder(access = AccessLevel.PUBLIC)
+@Builder
 @Getter
 @Entity
 public class Users implements UserDetails {
     @Id
     private String username;
     private String password;
+    private Boolean enabled;
+
     @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Authorities> authoritiesList = new ArrayList<>();
@@ -59,6 +61,6 @@ public class Users implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

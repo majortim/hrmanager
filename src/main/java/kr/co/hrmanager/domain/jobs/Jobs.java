@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
-@Builder(access = AccessLevel.PUBLIC)
+@Builder
 @Getter
 @Entity
 public class Jobs {

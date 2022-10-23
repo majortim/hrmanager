@@ -71,34 +71,32 @@ class UsersControllerTest {
                     .password("test123!")
                     .build();
 
-            String content = objectMapper.writeValueAsString(request);
-
-            this.mockMvc.perform(
-                    post("/signup")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(content)
-            ).andExpect(status().isCreated());
+            signupCommon(request)
+                    .andExpect(status().isCreated());
         });
 
         log.debug("root cause: {}", ex.getRootCause().getClass());
 
     }
 
-
-
     @Test
-    public void signup() throws Exception {
+    public void signupSuccess() throws Exception {
         SignUpRequest request = SignUpRequest.builder()
-                .username("admin")
+                .username("test")
                 .password("test123!")
                 .build();
 
+        signupCommon(request)
+                .andExpect(status().isCreated());
+    }
+
+    private ResultActions signupCommon(SignUpRequest request) throws Exception {
         String content = objectMapper.writeValueAsString(request);
-        this.mockMvc.perform(
+        return this.mockMvc.perform(
                 post("/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content)
-        ).andExpect(status().isCreated());
+        );
     }
 }
 

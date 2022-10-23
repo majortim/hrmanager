@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
-@Builder(access = AccessLevel.PUBLIC)
+@Builder
 @Getter
 @Entity
 @Table(name = "employee_status")

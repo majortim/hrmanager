@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `employees` (
                                            `emp_id` BIGINT NOT NULL COMMENT '사원 ID',
+                                           `username` VARCHAR(50) COMMENT '계정',
                                            `dept_id` BIGINT NULL COMMENT '사원 부서 ID',
                                            `job_id` BIGINT NULL COMMENT '직무 ID',
                                            `emp_name` VARCHAR(100) NOT NULL COMMENT '사원 이름',
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `employee_status` (
                                                  `es_id` BIGINT NOT NULL COMMENT '사원 상태 ID',
                                                  `emp_id` BIGINT NOT NULL COMMENT '사원 ID',
                                                  `es_ty` VARCHAR(90) COMMENT '상태 유형',
-                                                 `create_dt` DATETIME NULL COMMENT '퇴사일',
+                                                 `create_dt` DATETIME NULL COMMENT '생성일',
                                                  PRIMARY KEY (`es_id`)
 );
 
@@ -58,6 +59,14 @@ CREATE TABLE IF NOT EXISTS `tna` (
                                      PRIMARY KEY (`tna_id`)
 );
 
+CREATE TABLE IF NOT EXISTS `paid_time_off` (
+                                     `pto_id` BIGINT NOT NULL COMMENT '생성된 휴가 ID',
+                                     `emp_id` BIGINT NOT NULL COMMENT '사원 ID',
+                                     `pto_ty` VARCHAR(90) NOT NULL COMMENT '생성된 휴가 유형',
+                                     `pto_cnt` BIGINT NOT NULL COMMENT '생성된 휴가 일수',
+                                     `create_dt` DATETIME NULL COMMENT '생성일',
+                                     PRIMARY KEY (`pto_id`)
+);
 
 -- -----------------------------------------------------
 -- Table `salary_particulars`
@@ -97,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `annual_basic_salaries` (
 
 CREATE TABLE IF NOT EXISTS users(
                                     username VARCHAR(50) NOT NULL PRIMARY KEY,
-                                    password VARCHAR(100) NOT NULL
+                                    password VARCHAR(100) NOT NULL,
+                                    enabled BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE IF NOT EXISTS authorities (
