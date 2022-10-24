@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@AllArgsConstructor//(access = AccessLevel.PRIVATE, staticName = "of")
 @Builder
 @Getter
 @Entity

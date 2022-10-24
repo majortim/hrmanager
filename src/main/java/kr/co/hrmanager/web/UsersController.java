@@ -2,7 +2,6 @@ package kr.co.hrmanager.web;
 
 
 import kr.co.hrmanager.auth.PrincipalUser;
-import kr.co.hrmanager.domain.users.Authorities;
 import kr.co.hrmanager.domain.users.Users;
 import kr.co.hrmanager.service.auth.JwtService;
 import kr.co.hrmanager.service.users.UsersService;
@@ -19,14 +18,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 @Slf4j
@@ -35,9 +31,7 @@ import java.util.Optional;
 public class UsersController {
     private final UsersService usersService;
     private final PasswordEncoder passwordEncoder;
-
     private final JwtService jwtService;
-
     private final AuthenticationManager authenticationManager;
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -73,23 +67,12 @@ public class UsersController {
         }
     }
 
+    /**
+     *  테스트용 메서드
+     **/
     @GetMapping("/authorities")
     public Collection<? extends GrantedAuthority> authorities(@PrincipalUser Users user) {
-        
-        log.debug("authoritiesList: {}", user.getAuthoritiesList());
-        List<Authorities> authoritiesList = user.getAuthoritiesList();
 
-        if(!CollectionUtils.isEmpty(authoritiesList)) {
-            log.debug("authority: {}", authoritiesList.get(0));
-        }
-
-
-        Collection<? extends GrantedAuthority> grantedAuthorities = Optional.of(user.getAuthorities()).orElseThrow();
-
-        if(!CollectionUtils.isEmpty(grantedAuthorities)) {
-            log.debug("grantedAuthority: {}", grantedAuthorities.toArray()[0]);
-        }
-
-        return grantedAuthorities;
+        return user.getGrantedAuthorities();
     }
 }
