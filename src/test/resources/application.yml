@@ -1,3 +1,7 @@
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
 spring:
   datasource:
     url: jdbc:h2:mem:test;DATABASE_TO_LOWER=true
@@ -37,13 +41,12 @@ logging:
   level:
     root: ERROR
     org.gradle: ERROR
-    io.spring: ERROR
-    kr.co.hrmanager: DEBUG
-#    org:
+    java.sql: TRACE
+    org:
 #      gradle: ERROR
-#      springframework: info
-#      hibernate:
-#        type: trace
+      springframework: DEBUG
+      hibernate: TRACE
+    kr.co.hrmanager: DEBUG
 
 jwt:
   private:

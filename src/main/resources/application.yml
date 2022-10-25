@@ -37,13 +37,13 @@ logging:
   level:
     root: ERROR
     org.gradle: ERROR
-    io.spring: ERROR
-    kr.co.hrmanager: DEBUG
+#    java.sql: DEBUG
 #    org:
 #      gradle: ERROR
-#      springframework: info
+#      springframework: DEBUG
 #      hibernate:
-#        type: trace
+#        type: TRACE
+    kr.co.hrmanager: DEBUG
 
 jwt:
   private:
