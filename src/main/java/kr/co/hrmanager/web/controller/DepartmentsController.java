@@ -1,4 +1,4 @@
-package kr.co.hrmanager.web;
+package kr.co.hrmanager.web.controller;
 
 import kr.co.hrmanager.service.departments.DepartmentsService;
 import kr.co.hrmanager.web.dto.departments.DepartmentsSaveRequest;
