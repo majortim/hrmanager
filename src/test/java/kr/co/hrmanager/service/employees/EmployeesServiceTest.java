@@ -21,6 +21,7 @@ class EmployeesServiceTest {
     EmployeesService employeesService;
 
     @Test
+    @Sql("/sql/data/employees.sql")
     void findById() {
         Long employeeId = 1L;
 
