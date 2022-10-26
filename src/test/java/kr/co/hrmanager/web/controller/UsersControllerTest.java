@@ -1,4 +1,4 @@
-package kr.co.hrmanager.web;
+package kr.co.hrmanager.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.hrmanager.web.dto.users.LoginRequest;
