@@ -23,4 +23,9 @@ public class EmployeesService {
     public List<Employees> findByAll(Example<Employees> queryParam) {
         return repository.findAll(queryParam);
     }
+
+    @Transactional
+    public Employees save(Employees employee) {
+        return repository.save(employee);
+   }
 }
