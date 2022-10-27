@@ -1,5 +1,5 @@
-delete from users;
-delete from authorities;
+truncate table users;
+truncate table authorities;
 
 insert into users (username, password)
 values ('admin', '{bcrypt}$2a$10$poiwIoope2U4/l35F1iSEO4YJgUlBClgxnrbGRj56aRIySP23GuZe');

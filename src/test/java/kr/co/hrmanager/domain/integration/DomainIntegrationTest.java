@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 @SpringBootTest
 public class DomainIntegrationTest {
@@ -56,11 +58,9 @@ public class DomainIntegrationTest {
     }
 
     public void saveEmployees(Departments dept, Jobs job) {
-        Long empId = 1L;
         String empName = "홍길동";
 
         employeesRepository.save(Employees.builder()
-                .empId(empId)
                 .empName(empName)
                 .dept(dept)
                 .job(job)
@@ -79,7 +79,6 @@ public class DomainIntegrationTest {
 
         Employees employee = employeesRepository.getReferenceById(1L);
 
-
-        logger.debug("name: {}, dept: {}, job: {}", employee.getEmpName(), employee.getDept().getDeptName(), employee.getJob().getJobTitle());
+        assertNotNull(employee);
     }
 }

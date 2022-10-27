@@ -1,6 +1,5 @@
 package kr.co.hrmanager.web.controller;
 
-import kr.co.hrmanager.domain.employees.Employees;
 import kr.co.hrmanager.service.employees.EmployeesService;
 import kr.co.hrmanager.web.dto.common.PostSuccessResponse;
 import kr.co.hrmanager.web.dto.employees.CreateEmployeeRequest;
@@ -23,16 +22,9 @@ public class EmployeesController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public PostSuccessResponse signup(@Valid @RequestBody CreateEmployeeRequest request) {
+    public PostSuccessResponse create(@Valid @RequestBody CreateEmployeeRequest request) {
 
-        Employees employee = Employees.builder()
-                .empName(request.getEmpName())
-                .email(request.getEmail())
-                .phoneNumber(request.getPhoneNumber())
-                .hireDt(request.getHireDt())
-                .build();
-
-        employeesService.save(employee);
+        employeesService.create(request);
 
         return new PostSuccessResponse("회원가입이 완료됐습니다.");
     }

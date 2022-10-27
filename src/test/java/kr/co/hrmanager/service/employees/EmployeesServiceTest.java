@@ -1,6 +1,7 @@
 package kr.co.hrmanager.service.employees;
 
 import kr.co.hrmanager.domain.employees.Employees;
+import kr.co.hrmanager.web.dto.employees.CreateEmployeeRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,9 +27,9 @@ class EmployeesServiceTest {
     void findById() {
         Long employeeId = 1L;
 
-        Employees employee = employeesService.findById(employeeId).orElseThrow();
-
-        assertEquals(employeeId, employee.getEmpId());
+        Optional<Employees> employee = employeesService.findById(employeeId);
+                //.orElseThrow();
+        employee.ifPresent(e -> assertEquals(employeeId, e.getEmpId()));
     }
 
     @Test
@@ -43,5 +45,22 @@ class EmployeesServiceTest {
         List<Employees> employeesList = employeesService.findByAll(queryParam);
 
         assertFalse(CollectionUtils.isEmpty(employeesList));
+    }
+
+    @Test
+    @Sql({
+              "/sql/data/departments.sql"
+            , "/sql/data/employees.sql"
+    })
+    void create() {
+        CreateEmployeeRequest createEmployeeRequest = CreateEmployeeRequest.builder()
+                .empName("키위")
+                .username("admin")
+                .email("test@abc.com")
+                .phoneNumber("123")
+                .deptId(1L)
+                .build();
+
+        assertDoesNotThrow(() -> employeesService.create(createEmployeeRequest));
     }
 }

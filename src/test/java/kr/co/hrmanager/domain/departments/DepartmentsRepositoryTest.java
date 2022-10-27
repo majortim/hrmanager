@@ -23,6 +23,7 @@ public class DepartmentsRepositoryTest {
     public void cleanup() {
         departmentsRepository.deleteAll();
     }
+
     @Test
     public void saveAndLoad() {
         //given
@@ -30,20 +31,16 @@ public class DepartmentsRepositoryTest {
         String deptName = "테스트 부서명";
         Long managerId = 100L;
 
-        departmentsRepository.save(Departments.builder()
+        //when
+
+        Departments savedDepartment = departmentsRepository.save(Departments.builder()
                 .deptId(deptId)
                 .deptName(deptName)
                 .managerId(managerId)
                 .build());
 
-        //when
-        List<Departments> departmentsList = departmentsRepository.findAll();
-
-        logger.debug("list:  {}", departmentsList);
-
         //then
-        Departments departments = departmentsList.get(0);
-        assertThat(departments.getDeptId()).isEqualTo(deptId);
-        assertThat(departments.getDeptName()).isEqualTo(deptName);
+        assertThat(savedDepartment.getDeptId()).isEqualTo(deptId);
+        assertThat(savedDepartment.getDeptName()).isEqualTo(deptName);
     }
 }
