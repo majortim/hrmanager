@@ -28,11 +28,11 @@ public class EmployeeStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmployeeStatus that = (EmployeeStatus) o;
-        return Objects.equals(esId, that.esId) && Objects.equals(employee, that.employee);
+        return Objects.equals(esId, that.esId) && Objects.equals(employee.getEmpId(), that.employee.getEmpId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(esId, employee);
+        return Objects.hash(esId, employee.getEmpId());
     }
 }

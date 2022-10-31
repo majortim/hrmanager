@@ -3,6 +3,7 @@ package kr.co.hrmanager.service.pto;
 
 import kr.co.hrmanager.domain.pto.PaidTimeOff;
 import kr.co.hrmanager.domain.pto.PaidTimeOffRepository;
+import kr.co.hrmanager.web.dto.pto.PaidTImeOffCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,9 @@ public class PaidTimeOffService {
     }
 
     @Transactional
-    public PaidTimeOff save(PaidTimeOff param) {
-        return repository.save(param);
+    public PaidTimeOff create(PaidTImeOffCreateRequest createRequest) {
+
+
+        return null; //repository.save(param);
     }
 }
