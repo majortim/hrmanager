@@ -1,6 +1,5 @@
 package kr.co.hrmanager.service.salaries;
 
-import kr.co.hrmanager.domain.salaries.Salaries;
 import kr.co.hrmanager.domain.salaries.SalaryParticulars;
 import kr.co.hrmanager.domain.salaries.SalaryParticularsRepository;
 import lombok.RequiredArgsConstructor;
