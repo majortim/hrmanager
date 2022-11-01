@@ -31,6 +31,10 @@ public class EmployeesService {
         return employeesRepository.findById(id);
     }
 
+    public Optional<Employees> findByUser(Users user) {
+        return employeesRepository.findByUser(user);
+    }
+
     public List<Employees> findByAll(Example<Employees> queryParam) {
         return employeesRepository.findAll(queryParam);
     }

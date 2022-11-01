@@ -8,4 +8,5 @@ import lombok.*;
 @Getter
 public class PaidTImeOffCreateRequest {
     private Long empId;
+    private Integer baseYear;
 }
