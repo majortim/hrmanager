@@ -1,4 +1,4 @@
-package kr.co.hrmanager.domain.pto;
+package kr.co.hrmanager.domain.leaves;
 
 import kr.co.hrmanager.domain.employees.Employees;
 import lombok.*;
@@ -10,19 +10,26 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
 @Builder
 @Getter
-@Table(name = "paid_time_off")
 @Entity
-public class PaidTimeOff {
+public class Leaves {
     @Id
-    private Long ptoId;
+    private Long leaveId;
+
+    @OneToOne
+    @JoinColumn(name = "leave_id")
+    private Leaves parentLeave;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employees employee;
 
-    private PaidTimeOffType ptoTy;
+    private LeaveType leaveTy;
 
-    private Long ptoCnt;
+    private Long leaveCnt;
+
+    private Boolean paid;
+
+    private Boolean markedAsWorked;
 
     private LocalDateTime createDt;
 }

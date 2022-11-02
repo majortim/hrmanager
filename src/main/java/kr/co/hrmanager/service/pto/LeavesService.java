@@ -3,9 +3,9 @@ package kr.co.hrmanager.service.pto;
 
 import kr.co.hrmanager.domain.employees.Employees;
 import kr.co.hrmanager.domain.employees.EmployeesRepository;
-import kr.co.hrmanager.domain.pto.PaidTimeOff;
-import kr.co.hrmanager.domain.pto.PaidTimeOffRepository;
-import kr.co.hrmanager.web.dto.pto.PaidTImeOffCreateRequest;
+import kr.co.hrmanager.domain.leaves.Leaves;
+import kr.co.hrmanager.domain.leaves.LeavesRepository;
+import kr.co.hrmanager.web.dto.pto.LeavesCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -20,19 +20,19 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
-public class PaidTimeOffService {
-    private final PaidTimeOffRepository repository;
+public class LeavesService {
+    private final LeavesRepository repository;
     private final EmployeesRepository employeesRepository;
 
-    public Optional<PaidTimeOff> findById(Long id) {
+    public Optional<Leaves> findById(Long id) {
         return repository.findById(id);
     }
-    public List<PaidTimeOff> findAll(Example<PaidTimeOff> param) {
+    public List<Leaves> findAll(Example<Leaves> param) {
         return repository.findAll(param);
     }
 
     @Transactional
-    public PaidTimeOff create(PaidTImeOffCreateRequest createRequest) {
+    public Leaves create(LeavesCreateRequest createRequest) {
         Optional<Employees> optionalEmployee = Optional.ofNullable(createRequest.getEmpId())
                 .flatMap(employeesRepository::findById);
 
