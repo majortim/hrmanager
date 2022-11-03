@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
@@ -39,4 +40,24 @@ public class Employees {
     private LocalDateTime hireDt;
 
     private LocalDateTime retireDt;
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) {
+            return true;
+        }
+
+        if(!(o instanceof Employees)) {
+            return false;
+        }
+
+        Employees employee = (Employees) o;
+
+        return Objects.equals(empId, employee.getEmpId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(empId);
+    }
 }

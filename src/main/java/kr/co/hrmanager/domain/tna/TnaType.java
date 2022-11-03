@@ -17,8 +17,8 @@ public enum TnaType {
 
     private final String type;
 
-    TnaType(String status) {
-        this.type = status;
+    TnaType(String type) {
+        this.type = type;
     }
 
 }

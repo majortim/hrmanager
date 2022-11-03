@@ -9,10 +9,10 @@ public enum EmployeeStatusType {
     SUSPENDED("정직"),
     RETIRED("퇴직");
 
-    private final String status;
+    private final String type;
 
-    EmployeeStatusType(String status) {
-        this.status = status;
+    EmployeeStatusType(String type) {
+        this.type = type;
     }
 
 }

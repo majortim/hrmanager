@@ -1,4 +1,4 @@
-package kr.co.hrmanager.web.dto.pto;
+package kr.co.hrmanager.web.dto.leaves;
 
 import lombok.*;
 

@@ -1,27 +1,31 @@
 package kr.co.hrmanager.domain.leaves;
 
 import lombok.Getter;
+import static kr.co.hrmanager.domain.leaves.LeaveCategory.*;
 
 @Getter
 public enum LeaveType {
-    ANNUAL("연차"),
-    OFFICIAL("공가"),
-    COMPENSATION("보상휴가"),
-    MENSTRUAL("생리휴가"),
-    CONGRATULATIONS_AND_CONDOLENCES("경조사"),
-    MATERNITY("출산전후휴가"),
-    SPOUSAL_MATERNITY("배우자출산휴가"),
-    MISCARRIAGE_STILLBIRTH("유산/사산휴가"),
-    SUBFERTILITY("난임치료휴가"),
-    SICK("병가"),
-    PARENTAL("육아휴직"),
-    RECUPERATION("부상/질병 휴직")
+    ANNUAL("연차", DAY),
+    OFFICIAL("공가", DAY),
+    COMPENSATION("보상휴가", DAY),
+    MENSTRUAL("생리휴가", DAY),
+    CONGRATULATIONS_AND_CONDOLENCES("경조사", DAY),
+    MATERNITY("출산전후휴가", DAY),
+    SPOUSAL_MATERNITY("배우자출산휴가", DAY),
+    MISCARRIAGE_STILLBIRTH("유산·사산휴가", DAY),
+    SUBFERTILITY("난임치료휴가", DAY),
+    SICK("병가", DAY),
+    PARENTAL("육아휴직", LEAVE_OF_ABSENCE),
+    RECUPERATION("부상·질병휴직", LEAVE_OF_ABSENCE),
+    PERSONAL("기타 개인사유로 인한 휴직", LEAVE_OF_ABSENCE)
     ;
 
     private final String type;
+    private final LeaveCategory category;
 
-    LeaveType(String status) {
-        this.type = status;
+    LeaveType(String type, LeaveCategory category) {
+        this.type = type;
+        this.category = category;
     }
 
 }

@@ -16,7 +16,7 @@ public class Leaves {
     private Long leaveId;
 
     @OneToOne
-    @JoinColumn(name = "leave_id")
+    @JoinColumn(name = "leave_id", referencedColumnName = "parent_id")
     private Leaves parentLeave;
 
     @ManyToOne(fetch = FetchType.LAZY)
