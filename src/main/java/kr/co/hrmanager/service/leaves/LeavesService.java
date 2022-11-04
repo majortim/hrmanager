@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -51,6 +53,7 @@ public class LeavesService {
 
             long countAwl = tnaRepository.countByTnaTypeAndDateTime(TnaType.ABSENCE_WITHOUT_LEAVE, prevYearDt, targetDt);
 
+            log.debug("count between dates: {}", DAYS.between(prevYearDt, targetDt));
             log.debug("countAwl: {}", countAwl);
         });
 

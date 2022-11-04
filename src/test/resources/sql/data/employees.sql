@@ -13,4 +13,4 @@ CREATE TABLE IF NOT EXISTS employees (
 truncate table employees;
 
 insert into employees(emp_name, hire_dt)
-values('관리자', '20220310100000');
+values('관리자', '2022-03-10 10:00:00');
