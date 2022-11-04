@@ -15,6 +15,7 @@ public class SalaryParticulars {
     @Id
     private Long particularId;
     private String particular;
+    @Enumerated(EnumType.STRING)
     private SalaryType salaryTy;
 
     @Override

@@ -16,7 +16,7 @@ class DepartmentsServiceTest {
     DepartmentsService departmentsService;
 
     @Test
-    public void save() {
+    void save() {
         DepartmentsSaveRequest request
                 = DepartmentsSaveRequest.builder()
                 .deptId(1L)

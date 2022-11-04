@@ -31,44 +31,14 @@ public class DomainIntegrationTest {
     EmployeesRepository employeesRepository;
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         departmentsRepository.deleteAll();
         jobsRepository.deleteAll();
         employeesRepository.deleteAll();
     }
-
-    public void saveDepartments() {
-        Long deptId = 1L;
-        String deptName = "경영지원팀";
-
-        departmentsRepository.save(Departments.builder()
-                .deptId(deptId)
-                .deptName(deptName)
-                .build());
-    }
-
-    public void saveJobs() {
-        Long jobId = 1L;
-        String jobTitle = "대리";
-
-        jobsRepository.save(Jobs.builder()
-                .jobId(jobId)
-                .jobTitle(jobTitle)
-                .build());
-    }
-
-    public void saveEmployees(Departments dept, Jobs job) {
-        String empName = "홍길동";
-
-        employeesRepository.save(Employees.builder()
-                .empName(empName)
-                .dept(dept)
-                .job(job)
-                .build());
-    }
     @Transactional
     @Test
-    public void test(){
+    void saveDepartmentsAndJobsAndEmployees(){
         saveDepartments();
         saveJobs();
 
@@ -80,5 +50,35 @@ public class DomainIntegrationTest {
         Employees employee = employeesRepository.getReferenceById(1L);
 
         assertNotNull(employee);
+    }
+
+    private void saveDepartments() {
+        Long deptId = 1L;
+        String deptName = "경영지원팀";
+
+        departmentsRepository.save(Departments.builder()
+                .deptId(deptId)
+                .deptName(deptName)
+                .build());
+    }
+
+    private void saveJobs() {
+        Long jobId = 1L;
+        String jobTitle = "대리";
+
+        jobsRepository.save(Jobs.builder()
+                .jobId(jobId)
+                .jobTitle(jobTitle)
+                .build());
+    }
+
+    private void saveEmployees(Departments dept, Jobs job) {
+        String empName = "홍길동";
+
+        employeesRepository.save(Employees.builder()
+                .empName(empName)
+                .dept(dept)
+                .job(job)
+                .build());
     }
 }

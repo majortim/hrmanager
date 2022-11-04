@@ -17,13 +17,21 @@ class LeavesServiceTest {
     LeavesService leavesService;
 
     @Test
-    @Sql("/sql/data/employees.sql")
+    @Sql({
+            "/sql/data/employees.sql"
+            , "/sql/data/leaves.sql"
+            , "/sql/data/tna.sql"
+    })
     void create() {
         LeavesCreateRequest request = LeavesCreateRequest.builder()
                 .empId(1L)
-                .baseYear(2022)
+                .baseYear(2023)
                 .build();
 
         leavesService.create(request);
+    }
+
+    private void setupCreateData() {
+
     }
 }

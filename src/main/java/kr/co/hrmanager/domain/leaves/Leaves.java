@@ -23,6 +23,7 @@ public class Leaves {
     @JoinColumn(name = "emp_id")
     private Employees employee;
 
+    @Enumerated(EnumType.STRING)
     private LeaveType leaveTy;
 
     private Long leaveCnt;

@@ -15,12 +15,12 @@ public class DepartmentsRepositoryTest {
     DepartmentsRepository departmentsRepository;
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         departmentsRepository.deleteAll();
     }
 
     @Test
-    public void saveAndLoad() {
+    void saveAndLoad() {
         //given
         Long deptId = 10L;
         String deptName = "테스트 부서명";

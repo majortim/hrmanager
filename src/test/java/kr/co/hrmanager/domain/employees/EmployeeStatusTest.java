@@ -18,7 +18,7 @@ public class EmployeeStatusTest {
     @Autowired EmployeeStatusRepository repository;
 
     @Test
-    public void EmployeeStatusTypeSaveTest() {
+    void EmployeeStatusTypeSaveTest() {
         //given
 
         Employees employee = Employees.builder()

@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `departments` (
 CREATE TABLE IF NOT EXISTS `tna` (
                                      `tna_id` BIGINT NOT NULL COMMENT '근무 기록 ID',
                                      `emp_id` BIGINT NOT NULL COMMENT '사원 ID',
+                                     `leave_id` BIGINT NOT NULL COMMENT '휴가/휴직 ID',
                                      `tna_ty` VARCHAR(90) NOT NULL COMMENT '근무기록 유형',
                                      `start_dt` DATETIME NULL COMMENT '시작일시',
                                      `end_dt` DATETIME NULL COMMENT '종료일시',

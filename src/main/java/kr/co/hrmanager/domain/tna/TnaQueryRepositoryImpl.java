@@ -1,10 +1,14 @@
 package kr.co.hrmanager.domain.tna;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import kr.co.hrmanager.domain.employees.Employees;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static kr.co.hrmanager.domain.tna.QTna.tna;
 
@@ -14,16 +18,26 @@ public class TnaQueryRepositoryImpl implements TnaQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public long countByTnaTypeAndDateTime(TnaType tnaType, LocalDateTime startDt, LocalDateTime endDt) {
+    public long countByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
+        return steamByEmployeeAndTnaTypeListAndDateTime(employee, tnaTypeList, prevYearDt, targetDt)
+                .count();
+    }
+
+    @Override
+    public List<Tna> listByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
+        return steamByEmployeeAndTnaTypeListAndDateTime(employee, tnaTypeList, prevYearDt, targetDt)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Stream<Tna> steamByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
         return jpaQueryFactory.selectFrom(tna)
+                .where(tna.employee.eq(employee))
+                .where(tna.tnaTy.in(tnaTypeList))
                 .where(
-                        tna.tnaTy.eq(tnaType.getType())
-                                .and(
-                                        tna.startDt.between(startDt, endDt)
-                                                .or(tna.endDt.between(startDt, endDt))
-                                )
+                        tna.startDt.between(prevYearDt, targetDt)
+                                .or(tna.endDt.between(prevYearDt, targetDt))
                 )
-                .stream().count()
-                ;
+                .stream();
     }
 }
