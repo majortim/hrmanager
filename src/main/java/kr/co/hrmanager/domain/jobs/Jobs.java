@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
 @Entity

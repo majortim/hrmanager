@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
 @Entity

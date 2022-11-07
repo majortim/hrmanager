@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
 @Entity

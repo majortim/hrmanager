@@ -127,14 +127,18 @@ CREATE TABLE IF NOT EXISTS authorities (
 CREATE TABLE IF NOT EXISTS non_working_days_annual (
                                                        annual_id BIGINT NOT NULL,
                                                        annual_ty VARCHAR(50) NOT NULL,
-                                                       annual_month INTEGER NOT NULL,
-                                                       annual_day_of_month INTEGER NOT NULL,
-                                                       is_lunar BOOLEAN NOT NULL,
-                                                       is_holiday BOOLEAN NOT NULL,
+                                                       annual_nm VARCHAR(300) NOT NULL,
+                                                       annual_offset INTEGER NOT NULL DEFAULT 0,
+                                                       annual_cnt INTEGER NOT NULL DEFAULT 1,
+                                                       `month` INTEGER NOT NULL,
+                                                       day_of_month INTEGER NOT NULL,
+                                                       lunar BOOLEAN NOT NULL,
+                                                       holiday BOOLEAN NOT NULL,
                                                        paid BOOLEAN NOT NULL,
                                                        create_dt DATETIME NOT NULL,
                                                        enabled BOOLEAN NOT NULL,
-                                                       PRIMARY KEY (annual_id));
+                                                       PRIMARY KEY (annual_id)
+);
 
 
 -- -----------------------------------------------------
@@ -142,8 +146,8 @@ CREATE TABLE IF NOT EXISTS non_working_days_annual (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS non_working_days_weekly (
                                                        weekly_id BIGINT NOT NULL,
-                                                       weekly_day_of_week VARCHAR(50) NOT NULL,
-                                                       is_weekly_holiday BOOLEAN NOT NULL,
+                                                       `day_of_week` VARCHAR(50) NOT NULL,
+                                                       weekly_holiday BOOLEAN NOT NULL,
                                                        paid BOOLEAN NOT NULL,
                                                        create_dt DATETIME NOT NULL,
                                                        enabled BOOLEAN NOT NULL,
@@ -156,6 +160,7 @@ CREATE TABLE IF NOT EXISTS non_working_days_weekly (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS non_working_days_calendar (
                                                          nwd_id BIGINT NOT NULL,
+                                                         parent_id BIGINT NULL,
                                                          annual_id BIGINT NULL,
                                                          weekly_id BIGINT NULL,
                                                          nwd_dt DATETIME NOT NULL,
