@@ -6,6 +6,7 @@ import kr.co.hrmanager.domain.employees.EmployeesRepository;
 import kr.co.hrmanager.domain.leaves.LeaveType;
 import kr.co.hrmanager.domain.leaves.Leaves;
 import kr.co.hrmanager.domain.leaves.LeavesRepository;
+import kr.co.hrmanager.domain.nwd.NonWorkingDaysCalendarRepository;
 import kr.co.hrmanager.domain.tna.Tna;
 import kr.co.hrmanager.domain.tna.TnaRepository;
 import kr.co.hrmanager.domain.tna.TnaType;
@@ -31,6 +32,7 @@ public class LeavesService {
     private final LeavesRepository repository;
     private final EmployeesRepository employeesRepository;
     private final EmployeeStatusRepository employeeStatusRepository;
+    private final NonWorkingDaysCalendarRepository nonWorkingDaysCalendarRepository;
     private final TnaRepository tnaRepository;
 
     public Optional<Leaves> findById(Long id) {
@@ -53,7 +55,10 @@ public class LeavesService {
             LocalDateTime prevYearDt = LocalDateTime.of(baseYear, hireDt.getMonth(), hireDt.getDayOfMonth(), 0, 0).minusYears(1);
             LocalDateTime targetDt = prevYearDt.plusYears(1).plusDays(1).minusNanos(1);
 
-            long prescribedWorkingDays = DAYS.between(prevYearDt, targetDt);
+            long daysBetweenDates = DAYS.between(prevYearDt, targetDt);
+            long nonWorkingDays = nonWorkingDaysCalendarRepository.countByEnabledAndNwdDtBetween(true, prevYearDt, targetDt);
+
+            long prescribedWorkingDays = daysBetweenDates - nonWorkingDays;
 
             long countAbsence;  //휴가, 휴직, 결근
             //무단결근

@@ -9,7 +9,6 @@ public enum LeaveCategory {
 
     private final String category;
 
-
     LeaveCategory(String category) {
         this.category = category;
     }
