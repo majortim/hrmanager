@@ -15,9 +15,9 @@ public class NonWorkingDaysWeekly {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long weeklyId;
-    Integer dayOfWeek;
-    Boolean weeklyHoliday;
-    Boolean paid;
-    LocalDateTime createDt;
-    Boolean enabled;
+    private Integer dayOfWeek;
+    private Boolean weeklyHoliday;
+    private Boolean paid;
+    private LocalDateTime createDt;
+    private Boolean enabled;
 }

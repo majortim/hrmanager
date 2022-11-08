@@ -154,6 +154,17 @@ CREATE TABLE IF NOT EXISTS non_working_days_weekly (
                                                        PRIMARY KEY (weekly_id))
 ;
 
+-- -----------------------------------------------------
+-- Table non_working_days_temporary
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS non_working_days_temporary (
+                                                          temp_id BIGINT NOT NULL,
+                                                          temp_ty VARCHAR(50) NOT NULL,
+                                                          temp_nm VARCHAR(300) NOT NULL,
+                                                          paid BOOLEAN NOT NULL,
+                                                          create_dt DATETIME NOT NULL,
+                                                          enabled BOOLEAN NOT NULL,
+                                                          PRIMARY KEY (temp_id));
 
 -- -----------------------------------------------------
 -- Table non_working_days_calendar

@@ -6,21 +6,18 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "non_working_days_annual")
+@Table(name = "non_working_days_temporary")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
-public class NonWorkingDaysAnnual {
+public class NonWorkingDaysTemporary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long annualId;
+    private Long tempId;
     @Enumerated(EnumType.STRING)
-    private NonWorkingDaysAnnualType annualTy;
-    private Integer month;
-    private Integer dayOfMonth;
-    private Boolean lunar;
-    private Boolean holiday;
+    private NonWorkingDaysTemporaryType tempTy;
+    private String tempNm;
     private Boolean paid;
     private LocalDateTime createDt;
     private Boolean enabled;

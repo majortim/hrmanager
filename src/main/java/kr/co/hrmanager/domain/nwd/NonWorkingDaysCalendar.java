@@ -15,18 +15,17 @@ public class NonWorkingDaysCalendar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nwdId;
-
     @OneToOne
     @JoinColumn(name = "nwd_id", referencedColumnName = "parent_id")
     private NonWorkingDaysCalendar parentNwd;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "annual_id")
-    NonWorkingDaysAnnual annual;
+    private NonWorkingDaysAnnual annual;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "weekly_id")
-    NonWorkingDaysWeekly weekly;
-    LocalDateTime nwdDt;
-    Boolean enabled;
+    private NonWorkingDaysWeekly weekly;
+    private LocalDateTime nwdDt;
+    private Boolean enabled;
 
 
 }
