@@ -22,15 +22,10 @@ public class Leaves {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employees employee;
-
     @Enumerated(EnumType.STRING)
     private LeaveType leaveTy;
-
     private Long leaveCnt;
-
     private Boolean paid;
-
     private Boolean markedAsWorked;
-
     private LocalDateTime createDt;
 }

@@ -18,27 +18,19 @@ public class Employees {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long empId;
-
     @OneToOne
     @JoinColumn(name = "username")
     private Users user;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dept_id")
     private Departments dept;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id")
     private Jobs job;
-
     private String empName;
-
     private String email;
-
     private String phoneNumber;
-
     private LocalDateTime hireDt;
-
     private LocalDateTime retireDt;
 
     @Override
