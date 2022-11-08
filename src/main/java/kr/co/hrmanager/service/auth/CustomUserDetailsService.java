@@ -17,8 +17,8 @@ import org.springframework.util.CollectionUtils;
 import java.util.Collection;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service("userDetailsService")
+@RequiredArgsConstructor
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
     private final UsersRepository repository;
