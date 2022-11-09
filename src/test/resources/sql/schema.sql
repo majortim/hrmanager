@@ -174,6 +174,7 @@ CREATE TABLE IF NOT EXISTS non_working_days_calendar (
                                                          parent_id BIGINT NULL,
                                                          annual_id BIGINT NULL,
                                                          weekly_id BIGINT NULL,
+                                                         temp_id BIGINT NULL,
                                                          nwd_dt DATETIME NOT NULL,
                                                          enabled BOOLEAN NOT NULL,
                                                          PRIMARY KEY (nwd_id))

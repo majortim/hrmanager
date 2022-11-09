@@ -24,6 +24,9 @@ public class NonWorkingDaysCalendar {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "weekly_id")
     private NonWorkingDaysWeekly weekly;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "temp_id")
+    private NonWorkingDaysTemporary temporary;
     private LocalDateTime nwdDt;
     private Boolean enabled;
 
