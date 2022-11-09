@@ -15,8 +15,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Slf4j
 @SpringBootTest
+@Slf4j
 class EmployeesServiceTest {
 
     @Autowired

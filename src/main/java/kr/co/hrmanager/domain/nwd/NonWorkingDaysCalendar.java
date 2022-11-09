@@ -3,6 +3,7 @@ package kr.co.hrmanager.domain.nwd;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,7 +28,7 @@ public class NonWorkingDaysCalendar {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "temp_id")
     private NonWorkingDaysTemporary temporary;
-    private LocalDateTime nwdDt;
+    private LocalDate nwdDate;
     private Boolean enabled;
 
 

@@ -12,8 +12,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Slf4j
 @SpringBootTest
+@Slf4j
 class JobsServiceTest {
 
     @Autowired

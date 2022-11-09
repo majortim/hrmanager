@@ -3,6 +3,7 @@ package kr.co.hrmanager.domain.nwd;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,7 +16,8 @@ public class NonWorkingDaysWeekly {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long weeklyId;
-    private Integer dayOfWeek;
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek dayOfWeek;
     private Boolean weeklyHoliday;
     private Boolean paid;
     private LocalDateTime createDt;

@@ -52,21 +52,21 @@ public class LeavesService {
             Integer baseYear = Optional.of(createRequest.getBaseYear()).orElseThrow(() -> new NoSuchElementException("기준연도가 지정되지 않았습니다."));
             LocalDateTime hireDt = Optional.of(employee.getHireDt()).orElseThrow(() -> new NoSuchElementException("채용일시가 지정되지 않았습니다."));
 
-            LocalDateTime prevYearDt = LocalDateTime.of(baseYear, hireDt.getMonth(), hireDt.getDayOfMonth(), 0, 0).minusYears(1);
-            LocalDateTime targetDt = prevYearDt.plusYears(1).plusDays(1).minusNanos(1);
+            LocalDateTime prevYearDate = LocalDateTime.of(baseYear, hireDt.getMonth(), hireDt.getDayOfMonth(), 0, 0).minusYears(1);
+            LocalDateTime targetDate = prevYearDate.plusYears(1).plusDays(1).minusNanos(1);
 
-            long daysBetweenDates = DAYS.between(prevYearDt, targetDt);
-            long nonWorkingDays = nonWorkingDaysCalendarRepository.countByEnabledAndNwdDtBetween(true, prevYearDt, targetDt);
+            long daysBetweenDates = DAYS.between(prevYearDate, targetDate);
+            long nonWorkingDays = nonWorkingDaysCalendarRepository.countByEnabledAndNwdDateBetween(true, prevYearDate.toLocalDate(), targetDate.toLocalDate());
 
             long prescribedWorkingDays = daysBetweenDates - nonWorkingDays;
 
             long countAbsence;  //휴가, 휴직, 결근
             //무단결근
             long countWithoutLeave
-                    = tnaRepository.countByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.ABSENCE_WITHOUT_LEAVE), prevYearDt, targetDt);
+                    = tnaRepository.countByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.ABSENCE_WITHOUT_LEAVE), prevYearDate, targetDate);
 
             Stream<Tna> streamAbsence
-                    = tnaRepository.steamByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.LEAVE_OF_ABSENCE), prevYearDt, targetDt);
+                    = tnaRepository.steamByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.LEAVE_OF_ABSENCE), prevYearDate, targetDate);
             //개인 사유로 인한 휴직
             long countPersonal = streamAbsence.filter(
                     t -> Optional.ofNullable(t.getLeave())

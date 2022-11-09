@@ -11,8 +11,8 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Slf4j
 @SpringBootTest
+@Slf4j
 public class EmployeeStatusTest {
     @Autowired EmployeesRepository employeesRepository;
     @Autowired EmployeeStatusRepository repository;
