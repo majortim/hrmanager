@@ -17,6 +17,9 @@ public class NonWorkingDaysAnnual {
     private Long annualId;
     @Enumerated(EnumType.STRING)
     private NonWorkingDaysAnnualType annualTy;
+    private String annualNm;
+    private Integer annualOffset;
+    private Integer annualCnt;
     private Integer month;
     private Integer dayOfMonth;
     private Boolean lunar;
