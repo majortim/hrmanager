@@ -1,9 +1,8 @@
-truncate table users;
-truncate table authorities;
+TRUNCATE TABLE users;
+TRUNCATE TABLE authorities;
 
-insert into users (username, password)
-values ('admin', '{bcrypt}$2a$10$poiwIoope2U4/l35F1iSEO4YJgUlBClgxnrbGRj56aRIySP23GuZe');
+INSERT INTO users (username, password)
+VALUES ('admin', '{bcrypt}$2a$10$poiwIoope2U4/l35F1iSEO4YJgUlBClgxnrbGRj56aRIySP23GuZe');
 
-insert into authorities (auth_id, username, authority)
-values
-    (1, 'admin', 'ROLE_ADMIN');
+INSERT INTO authorities (auth_id, username, authority)
+VALUES (1, 'admin', 'ROLE_ADMIN');

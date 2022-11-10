@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS employees (
                                            retire_dt DATETIME NULL COMMENT '퇴사일',
                                            PRIMARY KEY (emp_id));
 
-truncate table employees;
+TRUNCATE TABLE employees;
 
-insert into employees(emp_name, hire_dt)
-values('관리자', '2022-03-10 10:00:00');
+INSERT INTO employees(emp_name, hire_dt)
+VALUES('관리자', '2022-03-10 10:00:00');

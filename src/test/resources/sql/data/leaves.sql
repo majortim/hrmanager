@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS leaves (
                                         PRIMARY KEY (leave_id)
 );
 
-truncate table leaves;
+TRUNCATE TABLE leaves;
 
-insert into leaves( leave_id
+INSERT INTO leaves( leave_id
                   , emp_id
                   , leave_ty
                   , leave_cnt

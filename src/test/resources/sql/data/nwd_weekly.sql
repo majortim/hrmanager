@@ -1,11 +1,14 @@
-CREATE TABLE IF NOT EXISTS non_working_days_weekly (
-                                                       weekly_id BIGINT NOT NULL,
-                                                       `day_of_week` VARCHAR(50) NOT NULL,
-                                                       weekly_holiday BOOLEAN NOT NULL,
-                                                       paid BOOLEAN NOT NULL,
-                                                       create_dt DATETIME NOT NULL,
-                                                       enabled BOOLEAN NOT NULL,
-                                                       PRIMARY KEY (weekly_id));
+CREATE TABLE IF NOT EXISTS non_working_days_weekly
+(
+    weekly_id      BIGINT      NOT NULL,
+    `day_of_week`  VARCHAR(50) NOT NULL,
+    weekly_holiday BOOLEAN     NOT NULL,
+    paid           BOOLEAN     NOT NULL,
+    create_dt      DATETIME    NOT NULL,
+    enabled        BOOLEAN     NOT NULL,
+    PRIMARY KEY (weekly_id)
+);
+TRUNCATE TABLE non_working_days_weekly;
 
 INSERT INTO non_working_days_weekly(weekly_id,
                                     `day_of_week`,
@@ -13,7 +16,7 @@ INSERT INTO non_working_days_weekly(weekly_id,
                                     paid,
                                     create_dt,
                                     enabled)
-values (1,
+VALUES (1,
         'SUNDAY',
         TRUE,
         TRUE,
@@ -26,7 +29,7 @@ INSERT INTO non_working_days_weekly(weekly_id,
                                     paid,
                                     create_dt,
                                     enabled)
-values (2,
+VALUES (2,
         'SATURDAY',
         FALSE,
         TRUE,
