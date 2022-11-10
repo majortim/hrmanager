@@ -2,4 +2,8 @@ package kr.co.hrmanager.domain.employees;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EmployeeStatusRepository extends JpaRepository<EmployeeStatus, Long> { }
+import java.util.List;
+
+public interface EmployeeStatusRepository extends JpaRepository<EmployeeStatus, Long> {
+    List<EmployeeStatus> findAllByEnabled(Boolean enabled);
+}

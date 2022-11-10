@@ -23,4 +23,12 @@ public class EmployeeStatusService {
     public List<EmployeeStatus> findByAll(Example<EmployeeStatus> queryParam) {
         return repository.findAll(queryParam);
     }
+
+    public List<EmployeeStatus> findAllByEnabled(Boolean enabled) {
+        return repository.findAllByEnabled(enabled);
+    }
+
+    public void save() {
+
+    }
 }

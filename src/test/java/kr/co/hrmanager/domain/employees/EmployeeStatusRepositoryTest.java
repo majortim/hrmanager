@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Slf4j
-public class EmployeeStatusTest {
+public class EmployeeStatusRepositoryTest {
     @Autowired EmployeesRepository employeesRepository;
     @Autowired EmployeeStatusRepository repository;
 
