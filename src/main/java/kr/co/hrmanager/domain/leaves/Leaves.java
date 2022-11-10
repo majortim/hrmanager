@@ -2,6 +2,7 @@ package kr.co.hrmanager.domain.leaves;
 
 import kr.co.hrmanager.domain.employees.Employees;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,5 +28,6 @@ public class Leaves {
     private Long leaveCnt;
     private Boolean paid;
     private Boolean markedAsWorked;
+    @CreatedDate
     private LocalDateTime createDt;
 }

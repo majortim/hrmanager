@@ -1,6 +1,7 @@
 package kr.co.hrmanager.domain.nwd;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ public class NonWorkingDaysAnnual {
     private Boolean lunar;
     private Boolean holiday;
     private Boolean paid;
+    @CreatedDate
     private LocalDateTime createDt;
     private Boolean enabled;
 }
