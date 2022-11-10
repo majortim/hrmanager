@@ -20,25 +20,23 @@ public class EmployeeStatusTest {
     @Test
     void EmployeeStatusTypeSaveTest() {
         //given
-
         Employees employee = Employees.builder()
-                .empId(1L)
                 .empName("테스트사원")
                 .build();
 
         Employees savedEmployee = employeesRepository.save(employee);
 
         EmployeeStatus employeeStatus = EmployeeStatus.builder()
-                .esId(1L)
                 .employee(savedEmployee)
                 .createDt(LocalDateTime.of(LocalDate.of(2022,2, 10), LocalTime.now()))
+                .startDate(LocalDate.of(2022, 2, 11))
                 .esTy(EmployeeStatusType.RETIRED)
+                .enabled(true)
                 .build();
         //when
         EmployeeStatus saved = repository.save(employeeStatus);
         //then
         assertEquals(EmployeeStatusType.RETIRED, saved.getEsTy());
-
     }
 
 

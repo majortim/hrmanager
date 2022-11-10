@@ -1,8 +1,10 @@
 package kr.co.hrmanager.domain.employees;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,7 +15,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "employee_status")
 public class EmployeeStatus {
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long esId;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,7 +23,12 @@ public class EmployeeStatus {
     private Employees employee;
     @Enumerated(EnumType.STRING)
     private EmployeeStatusType esTy;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDate scheduledEndDate;
+    @CreatedDate
     private LocalDateTime createDt;
+    private Boolean enabled;
 
     @Override
     public boolean equals(Object o) {
