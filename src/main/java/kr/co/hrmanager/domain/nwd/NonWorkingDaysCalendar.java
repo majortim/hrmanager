@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "non_working_days_calendar")
@@ -30,6 +29,4 @@ public class NonWorkingDaysCalendar {
     private NonWorkingDaysTemporary temporary;
     private LocalDate nwdDate;
     private Boolean enabled;
-
-
 }

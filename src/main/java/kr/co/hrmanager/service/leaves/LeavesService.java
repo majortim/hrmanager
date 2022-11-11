@@ -38,10 +38,6 @@ public class LeavesService {
     public Optional<Leaves> findById(Long id) {
         return repository.findById(id);
     }
-    /*
-    public List<Leaves> findAll(Example<Leaves> param) {
-        return repository.findAll(param);
-    }*/
 
     @Transactional
     public Leaves create(LeavesCreateRequest createRequest) {
@@ -93,6 +89,6 @@ public class LeavesService {
             }
         });
 
-        return null; //repository.save(param);
+        return null;
     }
 }
