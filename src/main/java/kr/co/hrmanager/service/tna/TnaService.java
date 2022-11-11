@@ -1,26 +1,42 @@
 package kr.co.hrmanager.service.tna;
 
+import kr.co.hrmanager.domain.employees.Employees;
+import kr.co.hrmanager.domain.employees.EmployeesRepository;
 import kr.co.hrmanager.domain.tna.Tna;
 import kr.co.hrmanager.domain.tna.TnaRepository;
+import kr.co.hrmanager.web.dto.tna.CreateTnaRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class TnaService {
-    private final TnaRepository repository;
+    private final TnaRepository tnaRepository;
+    private final EmployeesRepository employeesRepository;
+    //private final NonWorkingDaysCalendarRepository nonWorkingDaysCalendarRepository;
 
     public Optional<Tna> findById(Long id) {
-        return repository.findById(id);
+        return tnaRepository.findById(id);
     }
 
-    public List<Tna> findByAll(Example<Tna> queryParam) {
-        return repository.findAll(queryParam);
+    public Tna create(CreateTnaRequest request) {
+        LocalDateTime startDt = request.getStartDt();
+        LocalDateTime endDt = request.getEndDt();
+        //long days = Period.between(startDt.toLocalDate(), endDt.toLocalDate()).getDays();
+        //long countNwd = nonWorkingDaysCalendarRepository.countByEnabledAndNwdDateBetween(true, startDt.toLocalDate(), endDt.toLocalDate());
+        Employees employee = employeesRepository.findById(request.getEmpId()).orElseThrow();
+
+        Tna tna = Tna.builder()
+                .employee(employee)
+                .tnaTy(request.getTnaTy())
+                .startDt(startDt)
+                .endDt(endDt)
+                .build();
+        return tnaRepository.save(tna);
     }
 }

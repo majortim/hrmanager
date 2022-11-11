@@ -1,6 +1,7 @@
 package kr.co.hrmanager.service.leaves;
 
-import kr.co.hrmanager.web.dto.leaves.LeavesCreateRequest;
+import kr.co.hrmanager.domain.leaves.Leaves;
+import kr.co.hrmanager.web.dto.leaves.CreateAnnualRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ class LeavesServiceTest {
             , "/sql/data/tna.sql"
     })
     void create() {
-        LeavesCreateRequest request = LeavesCreateRequest.builder()
+        CreateAnnualRequest request = CreateAnnualRequest.builder()
                 .empId(1L)
                 .baseYear(2023)
                 .build();
 
-        leavesService.create(request);
+        Leaves createdLeave = leavesService.createAnnual(request);
+
+        assertNotNull(createdLeave);
     }
 
     private void setupCreateData() {

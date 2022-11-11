@@ -41,6 +41,7 @@ public class NonWorkingDaysCalendarService {
         List<NonWorkingDaysAnnual> listAnnual = annualRepository.findAllByEnabled(true);
         List<NonWorkingDaysWeekly> listWeekly = weeklyRepository.findAllByEnabled(true);
 
+        //TODO cnt, offset에 대한 처리
         for(NonWorkingDaysAnnual itemAnnual : listAnnual){
             LocalDate nwdDate = LocalDate.of(baseYear, itemAnnual.getMonth(), itemAnnual.getDayOfMonth());
 

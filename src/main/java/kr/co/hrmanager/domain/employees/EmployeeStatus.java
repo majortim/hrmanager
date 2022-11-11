@@ -2,6 +2,7 @@ package kr.co.hrmanager.domain.employees;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.Objects;
 @Getter
 @Entity
 @Table(name = "employee_status")
+@EntityListeners(AuditingEntityListener.class)
 public class EmployeeStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
-public class LeavesCreateRequest {
+public class CreateAnnualRequest {
     private Long empId;
     private Integer baseYear;
 }

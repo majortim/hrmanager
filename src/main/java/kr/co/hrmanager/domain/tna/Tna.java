@@ -1,7 +1,6 @@
 package kr.co.hrmanager.domain.tna;
 
 import kr.co.hrmanager.domain.employees.Employees;
-import kr.co.hrmanager.domain.leaves.Leaves;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,9 +19,6 @@ public class Tna {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employees employee;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "leave_id")
-    private Leaves leave;
     @Enumerated(EnumType.STRING)
     private TnaType tnaTy;
     private LocalDateTime startDt;
