@@ -7,6 +7,7 @@ import kr.co.hrmanager.domain.leaves.LeavesRepository;
 import kr.co.hrmanager.domain.nwd.NonWorkingDaysCalendarRepository;
 import kr.co.hrmanager.domain.tna.TnaRepository;
 import kr.co.hrmanager.domain.tna.TnaType;
+import kr.co.hrmanager.domain.users.Users;
 import kr.co.hrmanager.web.dto.leaves.CreateAnnualRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +41,9 @@ public class LeavesService {
 
     @Transactional
     public Leaves createAnnual(CreateAnnualRequest createRequest) {
-        Employees employee = Optional.ofNullable(createRequest.getEmpId())
-                .flatMap(employeesRepository::findById).orElseThrow();
+        String username = Optional.of(createRequest.getUsername()).orElseThrow();
+        Users user = Users.builder().username(username).build();
+        Employees employee = employeesRepository.findByUser(user).orElseThrow();
 
         Integer baseYear = Optional.of(createRequest.getBaseYear()).orElseThrow(() -> new NoSuchElementException("기준연도가 지정되지 않았습니다."));
         LocalDateTime hireDt = Optional.of(employee.getHireDt()).orElseThrow(() -> new NoSuchElementException("채용일시가 지정되지 않았습니다."));

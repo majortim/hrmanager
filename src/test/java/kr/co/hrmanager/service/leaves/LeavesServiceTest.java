@@ -25,7 +25,7 @@ class LeavesServiceTest {
     })
     void create() {
         CreateAnnualRequest request = CreateAnnualRequest.builder()
-                .empId(1L)
+                .username("admin")
                 .baseYear(2023)
                 .build();
 

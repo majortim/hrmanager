@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -32,4 +33,18 @@ public class Users {
         return this.authoritiesList.stream().map(a -> new SimpleGrantedAuthority(a.getAuthority().name())).collect(Collectors.toSet());
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(username);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (getClass() != obj.getClass())
+            return false;
+
+        Users user = (Users) obj;
+
+        return Objects.equals(username, user.username);
+    }
 }

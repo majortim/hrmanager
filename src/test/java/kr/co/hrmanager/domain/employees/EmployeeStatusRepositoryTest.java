@@ -59,6 +59,7 @@ public class EmployeeStatusRepositoryTest {
         List<EmployeeStatus> list = stream.collect(Collectors.toList());
 
         //then
+        log.debug("size: {}", list.size());
         assertTrue(list.size() > 0);
     }
 
@@ -84,7 +85,7 @@ public class EmployeeStatusRepositoryTest {
                 .esTy(esTy)
                 .enabled(true);
 
-        return Optional.of(endDate).map(builder::endDate).orElse(builder).build();
+        return Optional.ofNullable(endDate).map(builder::endDate).orElse(builder).build();
 
     }
 }

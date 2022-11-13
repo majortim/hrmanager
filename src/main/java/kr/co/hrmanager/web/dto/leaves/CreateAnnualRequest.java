@@ -7,6 +7,6 @@ import lombok.*;
 @Builder
 @Getter
 public class CreateAnnualRequest {
-    private Long empId;
+    private String username;
     private Integer baseYear;
 }
