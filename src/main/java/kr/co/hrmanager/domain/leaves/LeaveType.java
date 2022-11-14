@@ -1,6 +1,11 @@
 package kr.co.hrmanager.domain.leaves;
 
 import lombok.Getter;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static kr.co.hrmanager.domain.leaves.LeaveCategory.*;
 
 @Getter
@@ -26,6 +31,10 @@ public enum LeaveType {
     LeaveType(String type, LeaveCategory category) {
         this.type = type;
         this.category = category;
+    }
+
+    public static List<LeaveType> listAllByCategory(LeaveCategory category) {
+        return Arrays.stream(values()).filter(type -> type.getCategory().equals(category)).collect(Collectors.toList());
     }
 
 }
