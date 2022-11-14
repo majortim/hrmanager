@@ -73,7 +73,9 @@ public class NonWorkingDaysCalendarService {
             }
         }
 
-        log.debug("listCalendar: {}", listCalendar);
+        log.debug("listAnnual size: {}", listAnnual.size());
+        log.debug("listWeekly size: {}", listWeekly.size());
+        log.debug("listCalendar size: {}", listCalendar.size());
 
         if(listCalendar.isEmpty())
             return false;

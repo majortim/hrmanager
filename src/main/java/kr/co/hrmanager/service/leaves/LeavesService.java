@@ -58,6 +58,7 @@ public class LeavesService {
         //소정근로일
         long prescribedWorkingDays = daysBetweenDates - nonWorkingDays;
         //연차 계산할 때 출근한 것으로 계산하지 않는 휴가/휴직, 결근, 정직
+        log.debug("prescribedWorkingDays: {}", prescribedWorkingDays);
         long countAbsence;
         //무단결근
         long countWithoutLeave
@@ -108,7 +109,7 @@ public class LeavesService {
                     .leaveCnt(DEFAULT_ANNUAL_LEAVES + extraDays)
                     .paid(true)
                     .markedAsWorked(true)
-                    .createDt(LocalDateTime.now())
+                    .enabled(true)
                     .build();
 
             return repository.save(leave);

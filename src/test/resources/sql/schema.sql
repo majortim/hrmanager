@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `leaves` (
                                         `paid` BOOLEAN NOT NULL COMMENT '유급',
                                         `marked_as_worked` BOOLEAN NOT NULL COMMENT '연차생성시 출근으로 간주',
                                         `create_dt` DATETIME NULL COMMENT '생성일',
+                                        `enabled` BOOLEAN NOT NULL COMMENT '사용가능',
                                         PRIMARY KEY (`leave_id`)
 );
 

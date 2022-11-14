@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS leaves (
                                         paid BOOLEAN NOT NULL COMMENT '유급',
                                         marked_as_worked BOOLEAN NOT NULL COMMENT '연차생성시 출근으로 간주',
                                         create_dt DATETIME NULL COMMENT '생성일',
+                                        enabled BOOLEAN NOT NULL COMMENT '사용가능',
                                         PRIMARY KEY (leave_id)
 );
 
@@ -17,11 +18,13 @@ INSERT INTO leaves( emp_id
                   , leave_cnt
                   , paid
                   , marked_as_worked
-                  , create_dt)
+                  , create_dt
+                  , enabled)
 values (  1
         , 'PERSONAL'
         , 1
         , true
         , true
         , '2022-07-01 10:00:00'
+        , true
        );

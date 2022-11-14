@@ -1,26 +1,24 @@
 package kr.co.hrmanager.domain.leaves;
 
+import kr.co.hrmanager.domain.common.BaseEntity;
 import kr.co.hrmanager.domain.employees.Employees;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 @Getter
 @Entity
-public class Leaves {
+public class Leaves extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long leaveId;
-
     @OneToOne
     @JoinColumn(name = "leave_id", referencedColumnName = "parent_id")
     private Leaves parentLeave;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employees employee;
@@ -29,6 +27,4 @@ public class Leaves {
     private Long leaveCnt;
     private Boolean paid;
     private Boolean markedAsWorked;
-    @CreatedDate
-    private LocalDateTime createDt;
 }

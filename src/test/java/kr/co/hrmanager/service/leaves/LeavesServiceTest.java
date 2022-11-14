@@ -33,8 +33,4 @@ class LeavesServiceTest {
 
         assertNotNull(createdLeave);
     }
-
-    private void setupCreateData() {
-
-    }
 }
