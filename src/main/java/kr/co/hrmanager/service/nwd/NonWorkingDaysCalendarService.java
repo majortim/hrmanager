@@ -52,6 +52,19 @@ public class NonWorkingDaysCalendarService {
                     .build();
 
             listCalendar.add(calendarDate);
+
+            int cnt = itemAnnual.getAnnualCnt();
+            int offset = itemAnnual.getAnnualOffset();
+
+            if(cnt > 1) {
+                for(int i = 0; i < cnt; i++) {
+                    int plusNumber = offset + i;
+                    if(plusNumber != 0) {
+                        LocalDate addionalDate = nwdDate.plusDays(plusNumber);
+                        //TODO
+                    }
+                }
+            }
         }
 
         for(NonWorkingDaysWeekly itemWeekly : listWeekly) {
