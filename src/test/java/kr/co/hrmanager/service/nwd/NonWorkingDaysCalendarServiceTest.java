@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,14 +38,15 @@ class NonWorkingDaysCalendarServiceTest {
             "/sql/data/nwd_annual.sql"
             , "/sql/data/nwd_weekly.sql"
     })
-    void createAndFind() {
+    @Transactional
+    public void createAndFind() {
         CalendarCreateRequest createRequest = CalendarCreateRequest.of(2022);
         CalendarFindRequest findRequest = CalendarFindRequest.of(2022);
 
         nonWorkingDaysCalendarService.create(createRequest);
         List<NonWorkingDaysCalendar> list = nonWorkingDaysCalendarService.findAllByYear(findRequest);
 
-        log.debug("size: {}", list.isEmpty() ? 0 : list.size());
+        log.debug("found size: {}", list.isEmpty() ? 0 : list.size());
         assertFalse(list.isEmpty());
         assertNotEquals(0, list.size());
     }

@@ -5,6 +5,10 @@ import kr.co.hrmanager.web.dto.nwd.CalendarCreateRequest;
 import kr.co.hrmanager.web.dto.nwd.CalendarFindRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.time4j.PlainDate;
+import net.time4j.calendar.EastAsianMonth;
+import net.time4j.calendar.EastAsianYear;
+import net.time4j.calendar.KoreanCalendar;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,9 +45,18 @@ public class NonWorkingDaysCalendarService {
         List<NonWorkingDaysAnnual> listAnnual = annualRepository.findAllByEnabled(true);
         List<NonWorkingDaysWeekly> listWeekly = weeklyRepository.findAllByEnabled(true);
 
-        //TODO cnt, offset에 대한 처리
-        for(NonWorkingDaysAnnual itemAnnual : listAnnual){
-            LocalDate nwdDate = LocalDate.of(baseYear, itemAnnual.getMonth(), itemAnnual.getDayOfMonth());
+        for(NonWorkingDaysAnnual itemAnnual : listAnnual) {
+            LocalDate nwdDate;
+
+            //음력일경우 양력으로 변환
+            if(itemAnnual.getLunar()) {
+                KoreanCalendar lunarDate =
+                        KoreanCalendar.of(EastAsianYear.forGregorian(baseYear), EastAsianMonth.valueOf(itemAnnual.getMonth()), itemAnnual.getDayOfMonth());
+                nwdDate = lunarDate.transform(PlainDate.axis()).toTemporalAccessor();
+            }
+            else {
+                nwdDate = LocalDate.of(baseYear, itemAnnual.getMonth(), itemAnnual.getDayOfMonth());
+            }
 
             NonWorkingDaysCalendar calendarDate = NonWorkingDaysCalendar.builder()
                     .annual(itemAnnual)
@@ -56,12 +69,20 @@ public class NonWorkingDaysCalendarService {
             int cnt = itemAnnual.getAnnualCnt();
             int offset = itemAnnual.getAnnualOffset();
 
+            //추석, 설날처럼 휴일이 1일보다 많이 지정되어 있는 경우
             if(cnt > 1) {
                 for(int i = 0; i < cnt; i++) {
                     int plusNumber = offset + i;
                     if(plusNumber != 0) {
                         LocalDate addionalDate = nwdDate.plusDays(plusNumber);
-                        //TODO
+                        NonWorkingDaysCalendar childCalendarDate = NonWorkingDaysCalendar.builder()
+                                .parentNwd(calendarDate)
+                                .annual(itemAnnual)
+                                .nwdDate(addionalDate)
+                                .enabled(true)
+                                .build();
+
+                        listCalendar.add(childCalendarDate);
                     }
                 }
             }
@@ -86,8 +107,6 @@ public class NonWorkingDaysCalendarService {
             }
         }
 
-        log.debug("listAnnual size: {}", listAnnual.size());
-        log.debug("listWeekly size: {}", listWeekly.size());
         log.debug("listCalendar size: {}", listCalendar.size());
 
         if(listCalendar.isEmpty())
