@@ -24,6 +24,7 @@ public class LeavesRepositoryTest {
 
         Leaves parentalLeaves = Leaves.builder()
                 .employee(employee)
+                .baseYear(2022)
                 .leaveTy(LeaveType.PARENTAL)
                 .leaveCnt(5L)
                 .paid(true)
@@ -32,6 +33,7 @@ public class LeavesRepositoryTest {
                 .build();
         Leaves officialLeaves = Leaves.builder()
                 .employee(employee)
+                .baseYear(2022)
                 .leaveTy(LeaveType.OFFICIAL)
                 .leaveCnt(3L)
                 .paid(true)

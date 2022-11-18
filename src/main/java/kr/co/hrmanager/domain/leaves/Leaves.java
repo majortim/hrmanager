@@ -22,6 +22,7 @@ public class Leaves extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
     private Employees employee;
+    private Integer baseYear;
     @Enumerated(EnumType.STRING)
     private LeaveType leaveTy;
     private Long leaveCnt;

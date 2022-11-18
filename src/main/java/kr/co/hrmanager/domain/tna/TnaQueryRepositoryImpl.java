@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static kr.co.hrmanager.domain.tna.QTna.tna;
+import static kr.co.hrmanager.domain.nwd.QNonWorkingDaysCalendar.nonWorkingDaysCalendar;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,9 +19,10 @@ public class TnaQueryRepositoryImpl implements TnaQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
+    //TODO count 수정
     public long countByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
         return steamByEmployeeAndTnaTypeListAndDateTime(employee, tnaTypeList, prevYearDt, targetDt)
-                .count();
+                .count() - countNonWorkingDaysCalendarBetweenDates(prevYearDt, targetDt);
     }
 
     @Override
@@ -39,5 +41,11 @@ public class TnaQueryRepositoryImpl implements TnaQueryRepository {
                                 .or(tna.endDt.between(prevYearDt, targetDt))
                 )
                 .stream();
+    }
+
+    private long countNonWorkingDaysCalendarBetweenDates(LocalDateTime startDt, LocalDateTime endDt) {
+        return jpaQueryFactory.select(nonWorkingDaysCalendar.count())
+                .where(nonWorkingDaysCalendar.nwdDate.between(startDt.toLocalDate(), endDt.toLocalDate()))
+                .fetchFirst();
     }
 }

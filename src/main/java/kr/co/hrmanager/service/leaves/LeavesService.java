@@ -5,6 +5,7 @@ import kr.co.hrmanager.domain.leaves.LeaveType;
 import kr.co.hrmanager.domain.leaves.Leaves;
 import kr.co.hrmanager.domain.leaves.LeavesRepository;
 import kr.co.hrmanager.domain.nwd.NonWorkingDaysCalendarRepository;
+import kr.co.hrmanager.domain.tna.Tna;
 import kr.co.hrmanager.domain.tna.TnaRepository;
 import kr.co.hrmanager.domain.tna.TnaType;
 import kr.co.hrmanager.domain.users.Users;
@@ -66,17 +67,13 @@ public class LeavesService {
         //개인 사유로 인한 휴직
 
         //
-        /*
         Stream<Tna> streamAbsence
                 = tnaRepository.steamByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.LEAVE_OF_ABSENCE), targetStartDt, targetEndDt);
-
-        // streamAbsence.filter(
-        //                    t -> Optional.ofNullable(t.getLeave())
-        //                    .map(Leaves::getLeaveTy)
-        //                    .stream()
-        //                    .anyMatch(leaveType -> leaveType.equals(LeaveType.PERSONAL)))
-        //            .count()*/
-        long countPersonal = 0;
+        long countPersonal = streamAbsence.filter(
+                t -> Optional.ofNullable(t.getLeaveTy())
+                                .stream()
+                                .anyMatch(leaveType -> leaveType.equals(LeaveType.PERSONAL))
+                ).count();
 
         Stream<EmployeeStatus> streamSuspended
                 = employeeStatusRepository.findAllByEnabledAndDates(true, targetStartDt.toLocalDate(), targetEndDt.toLocalDate())
@@ -105,6 +102,7 @@ public class LeavesService {
 
             Leaves leave = Leaves.builder()
                     .employee(employee)
+                    .baseYear(baseYear)
                     .leaveTy(LeaveType.ANNUAL)
                     .leaveCnt(DEFAULT_ANNUAL_LEAVES + extraDays)
                     .paid(true)
