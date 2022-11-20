@@ -7,11 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
-class NonWorkingDaysCalendarlRepositoryTest {
+class NonWorkingDaysCalendarRepositoryTest {
     @Autowired
     NonWorkingDaysCalendarRepository repository;
     @Test
