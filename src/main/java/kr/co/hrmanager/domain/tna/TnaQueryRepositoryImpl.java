@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,29 +21,33 @@ public class TnaQueryRepositoryImpl implements TnaQueryRepository {
 
     @Override
     public long countByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
-        return steamByEmployeeAndTnaTypeListAndDateTime(employee, tnaTypeList, prevYearDt, targetDt)
+        return streamByEmployeeAndTnaTypeListAndDateTime(employee, tnaTypeList, prevYearDt, targetDt)
                 .count();
     }
 
     @Override
     public List<Tna> listByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
-        return steamByEmployeeAndTnaTypeListAndDateTime(employee, tnaTypeList, prevYearDt, targetDt)
+        return streamByEmployeeAndTnaTypeListAndDateTime(employee, tnaTypeList, prevYearDt, targetDt)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Set<LocalDate> setAllDates(Stream<Tna> streamTna) {
+    public Set<LocalDate> toSetAllDates(Stream<Tna> streamTna) {
+        /*
         Set<LocalDate> set = new HashSet<>();
         streamTna.forEach(tna -> set.addAll(
                 tna.getStartDt().toLocalDate().datesUntil(tna.getEndDt().toLocalDate())
                         .collect(Collectors.toSet())
         ));
-
         return set;
+        */
+
+        return streamTna.flatMap( t -> t.getStartDt().toLocalDate().datesUntil(t.getEndDt().toLocalDate().plusDays(1)))
+                .collect(Collectors.toSet());
     }
 
     @Override
-    public Stream<Tna> steamByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
+    public Stream<Tna> streamByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
         return jpaQueryFactory.selectFrom(tna)
                 .where(tna.employee.eq(employee))
                 .where(tna.tnaTy.in(tnaTypeList))

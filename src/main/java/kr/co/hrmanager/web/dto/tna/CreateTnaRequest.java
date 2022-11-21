@@ -1,5 +1,6 @@
 package kr.co.hrmanager.web.dto.tna;
 
+import kr.co.hrmanager.domain.leaves.LeaveType;
 import kr.co.hrmanager.domain.tna.TnaType;
 import lombok.*;
 
@@ -11,8 +12,9 @@ import java.time.LocalDateTime;
 @Getter
 public class CreateTnaRequest {
     private Long empId;
-    private Long leaveId;
+    private String username;
     private TnaType tnaTy;
+    private LeaveType leaveTy;
     private LocalDateTime startDt;
     private LocalDateTime endDt;
 }

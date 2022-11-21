@@ -68,7 +68,7 @@ public class LeavesService {
 
         //
         Stream<Tna> streamAbsence
-                = tnaRepository.steamByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.LEAVE_OF_ABSENCE), targetStartDt, targetEndDt);
+                = tnaRepository.streamByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.LEAVE_OF_ABSENCE), targetStartDt, targetEndDt);
         long countPersonal = streamAbsence.filter(
                 t -> Optional.ofNullable(t.getLeaveTy())
                                 .stream()
