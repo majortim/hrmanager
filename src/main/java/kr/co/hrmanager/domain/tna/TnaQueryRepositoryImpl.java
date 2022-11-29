@@ -1,14 +1,13 @@
 package kr.co.hrmanager.domain.tna;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.hrmanager.domain.employees.Employees;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,21 +31,6 @@ public class TnaQueryRepositoryImpl implements TnaQueryRepository {
     }
 
     @Override
-    public Set<LocalDate> toSetAllDates(Stream<Tna> streamTna) {
-        /*
-        Set<LocalDate> set = new HashSet<>();
-        streamTna.forEach(tna -> set.addAll(
-                tna.getStartDt().toLocalDate().datesUntil(tna.getEndDt().toLocalDate())
-                        .collect(Collectors.toSet())
-        ));
-        return set;
-        */
-
-        return streamTna.flatMap( t -> t.getStartDt().toLocalDate().datesUntil(t.getEndDt().toLocalDate().plusDays(1)))
-                .collect(Collectors.toSet());
-    }
-
-    @Override
     public Stream<Tna> streamByEmployeeAndTnaTypeListAndDateTime(Employees employee, List<TnaType> tnaTypeList, LocalDateTime prevYearDt, LocalDateTime targetDt) {
         return jpaQueryFactory.selectFrom(tna)
                 .where(tna.employee.eq(employee))
@@ -56,5 +40,11 @@ public class TnaQueryRepositoryImpl implements TnaQueryRepository {
                                 .or(tna.endDt.between(prevYearDt, targetDt))
                 )
                 .stream();
+    }
+
+    public List<Tna> listByPredicates(Predicate... predicates) {
+        return jpaQueryFactory.selectFrom(tna)
+                .where(predicates)
+                .stream().collect(Collectors.toList());
     }
 }

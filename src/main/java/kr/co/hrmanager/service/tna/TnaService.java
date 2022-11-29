@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -30,8 +31,6 @@ public class TnaService {
     }
 
     public Tna create(CreateTnaRequest request) {
-
-
         LocalDateTime startDt = request.getStartDt();
         LocalDateTime endDt = request.getEndDt();
         String username = request.getUsername();
@@ -50,8 +49,8 @@ public class TnaService {
     }
 
     public Set<LocalDate> toSetAllDates(CreateTnaRequest request) {
-        LocalDateTime startDt = request.getStartDt();
-        LocalDateTime endDt = request.getEndDt();
+        final LocalDateTime startDt = request.getStartDt();
+        final LocalDateTime endDt = request.getEndDt();
         TnaType tnaTy = request.getTnaTy();
         String username = request.getUsername();
         Users user = Users.builder().username(username).build();
@@ -61,6 +60,17 @@ public class TnaService {
         Stream<Tna> streamTna =
                 tnaRepository.streamByEmployeeAndTnaTypeListAndDateTime(employee, filterTnaTypeList, startDt, endDt);
 
-        return tnaRepository.toSetAllDates(streamTna);
+        return streamTna.flatMap(tna -> {
+            LocalDate tnaStartDate = tna.getStartDt().toLocalDate();
+            LocalDate tnaEndDate = tna.getEndDt().toLocalDate();
+            LocalDate requestStartDate = startDt.toLocalDate();
+            LocalDate requestEndDate = endDt.toLocalDate();
+
+            LocalDate startDate = tnaStartDate.isAfter(requestStartDate) ? tnaStartDate : requestStartDate;
+            LocalDate endDate = tnaEndDate.isBefore(requestEndDate) ? tnaEndDate : requestEndDate;
+
+            return startDate.datesUntil(endDate.plusDays(1));
+        })
+                .collect(Collectors.toSet());
     }
 }

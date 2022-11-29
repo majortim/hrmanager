@@ -20,7 +20,7 @@ INSERT INTO tna( tna_id
                , start_dt
                , end_dt)
 VALUES ( 1
-       , 1
+       , (SELECT emp_id FROM "employees" WHERE "username" = 'admin')
        , 2022
        , 'LEAVE_OF_ABSENCE'
        , 'PERSONAL'
@@ -34,7 +34,7 @@ INSERT INTO tna( tna_id
                , start_dt
                , end_dt)
 VALUES ( 2
-       , 1
+       , (SELECT emp_id FROM "employees" WHERE "username" = 'admin')
        , 2022
        , 'ABSENCE_WITHOUT_LEAVE'
        , '2022-09-13 00:00:00'

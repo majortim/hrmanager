@@ -65,8 +65,6 @@ public class LeavesService {
         long countWithoutLeave
                 = tnaRepository.countByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.ABSENCE_WITHOUT_LEAVE), targetStartDt, targetEndDt);
         //개인 사유로 인한 휴직
-
-        //
         Stream<Tna> streamAbsence
                 = tnaRepository.streamByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.LEAVE_OF_ABSENCE), targetStartDt, targetEndDt);
         long countPersonal = streamAbsence.filter(
@@ -74,11 +72,10 @@ public class LeavesService {
                                 .stream()
                                 .anyMatch(leaveType -> leaveType.equals(LeaveType.PERSONAL))
                 ).count();
-
+        //정직
         Stream<EmployeeStatus> streamSuspended
                 = employeeStatusRepository.findAllByEnabledAndDates(true, targetStartDt.toLocalDate(), targetEndDt.toLocalDate())
                 .filter(status -> status.getEsTy().equals(EmployeeStatusType.SUSPENDED));
-        //정직
         long countSuspended = streamSuspended.count();
 
         countAbsence = countWithoutLeave + countPersonal + countSuspended;

@@ -38,7 +38,7 @@ class TnaServiceTest {
                 .tnaTy(TnaType.ABSENCE_WITHOUT_LEAVE)
                 .build();
         Set<LocalDate> set = tnaService.toSetAllDates(request);
-        log.debug("set: {}", set);
+        log.debug("setDates: {}", set);
 
         assertFalse(set.isEmpty());
     }
@@ -50,7 +50,7 @@ class TnaServiceTest {
         LocalDateTime endDt = LocalDateTime.of(2022, 1, 21, 23, 59);
         Set<LocalDate> set = startDt.toLocalDate().datesUntil(endDt.toLocalDate().plusDays(1)).collect(Collectors.toSet());
 
-        log.debug("set: {}", set);
+        log.debug("setDates: {}", set);
 
         assertFalse(set.isEmpty());
     }
