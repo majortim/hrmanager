@@ -1,7 +1,7 @@
 package kr.co.hrmanager.service.employees;
 
 import kr.co.hrmanager.domain.employees.Employees;
-import kr.co.hrmanager.web.dto.employees.CreateEmployeeRequest;
+import kr.co.hrmanager.dto.employees.CreateEmployeeRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
