@@ -1,7 +1,7 @@
 package kr.co.hrmanager.service.leaves;
 
 import kr.co.hrmanager.domain.leaves.Leaves;
-import kr.co.hrmanager.web.dto.leaves.CreateAnnualRequest;
+import kr.co.hrmanager.dto.leaves.CreateAnnualRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,16 +4,15 @@ import kr.co.hrmanager.domain.employees.Employees;
 import kr.co.hrmanager.domain.employees.EmployeesRepository;
 import kr.co.hrmanager.domain.tna.Tna;
 import kr.co.hrmanager.domain.tna.TnaRepository;
-import kr.co.hrmanager.domain.tna.TnaType;
 import kr.co.hrmanager.domain.users.Users;
-import kr.co.hrmanager.web.dto.tna.CreateTnaRequest;
+import kr.co.hrmanager.dto.tna.CreateTnaRequest;
+import kr.co.hrmanager.dto.tna.FindTnaCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,17 +47,12 @@ public class TnaService {
         return tnaRepository.save(tna);
     }
 
-    public Set<LocalDate> toSetAllDates(CreateTnaRequest request) {
-        final LocalDateTime startDt = request.getStartDt();
-        final LocalDateTime endDt = request.getEndDt();
-        TnaType tnaTy = request.getTnaTy();
-        String username = request.getUsername();
-        Users user = Users.builder().username(username).build();
-        Employees employee = employeesRepository.findByUser(user).orElseThrow();
-        List<TnaType> filterTnaTypeList = List.of(tnaTy);
+    public Set<LocalDate> toSetAllDates(FindTnaCondition condition) {
+        final LocalDateTime startDt = condition.getTargetStartDt();
+        final LocalDateTime endDt = condition.getTargetEndDt();
 
         Stream<Tna> streamTna =
-                tnaRepository.streamByEmployeeAndTnaTypeListAndDateTime(employee, filterTnaTypeList, startDt, endDt);
+                tnaRepository.streamByCondition(condition);
 
         return streamTna.flatMap(tna -> {
             LocalDate tnaStartDate = tna.getStartDt().toLocalDate();

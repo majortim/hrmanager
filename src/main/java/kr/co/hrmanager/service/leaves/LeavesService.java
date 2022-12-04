@@ -5,11 +5,11 @@ import kr.co.hrmanager.domain.leaves.LeaveType;
 import kr.co.hrmanager.domain.leaves.Leaves;
 import kr.co.hrmanager.domain.leaves.LeavesRepository;
 import kr.co.hrmanager.domain.nwd.NonWorkingDaysCalendarRepository;
-import kr.co.hrmanager.domain.tna.Tna;
 import kr.co.hrmanager.domain.tna.TnaRepository;
 import kr.co.hrmanager.domain.tna.TnaType;
 import kr.co.hrmanager.domain.users.Users;
-import kr.co.hrmanager.web.dto.leaves.CreateAnnualRequest;
+import kr.co.hrmanager.dto.leaves.CreateAnnualRequest;
+import kr.co.hrmanager.dto.tna.FindTnaCondition;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -62,16 +61,27 @@ public class LeavesService {
         log.debug("prescribedWorkingDays: {}", prescribedWorkingDays);
         long countAbsence;
         //무단결근
+        FindTnaCondition conditionWithoutLeave
+                = FindTnaCondition.builder()
+                .username(username)
+                .tnaType(TnaType.ABSENCE_WITHOUT_LEAVE)
+                .targetStartDt(targetStartDt)
+                .targetEndDt(targetEndDt)
+                .build();
         long countWithoutLeave
-                = tnaRepository.countByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.ABSENCE_WITHOUT_LEAVE), targetStartDt, targetEndDt);
+                = tnaRepository.countByCondition(conditionWithoutLeave);
+
         //개인 사유로 인한 휴직
-        Stream<Tna> streamAbsence
-                = tnaRepository.streamByEmployeeAndTnaTypeListAndDateTime(employee, List.of(TnaType.LEAVE_OF_ABSENCE), targetStartDt, targetEndDt);
-        long countPersonal = streamAbsence.filter(
-                t -> Optional.ofNullable(t.getLeaveTy())
-                                .stream()
-                                .anyMatch(leaveType -> leaveType.equals(LeaveType.PERSONAL))
-                ).count();
+        FindTnaCondition conditionPersonal
+                = FindTnaCondition.builder()
+                .username(username)
+                .tnaType(TnaType.LEAVE_OF_ABSENCE)
+                .leaveType(LeaveType.PERSONAL)
+                .targetStartDt(targetStartDt)
+                .targetEndDt(targetEndDt)
+                .build();
+        long countPersonal = tnaRepository.countByCondition(conditionPersonal);
+
         //정직
         Stream<EmployeeStatus> streamSuspended
                 = employeeStatusRepository.findAllByEnabledAndDates(true, targetStartDt.toLocalDate(), targetEndDt.toLocalDate())

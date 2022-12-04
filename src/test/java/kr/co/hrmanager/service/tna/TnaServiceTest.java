@@ -1,7 +1,7 @@
 package kr.co.hrmanager.service.tna;
 
 import kr.co.hrmanager.domain.tna.TnaType;
-import kr.co.hrmanager.web.dto.tna.CreateTnaRequest;
+import kr.co.hrmanager.dto.tna.FindTnaCondition;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 @Slf4j
@@ -31,13 +31,13 @@ class TnaServiceTest {
             , "/sql/data/tna.sql"
     })
     void toSetAllDates() {
-        CreateTnaRequest request = CreateTnaRequest.builder()
+        FindTnaCondition condition = FindTnaCondition.builder()
                 .username("admin")
-                .startDt(LocalDateTime.of(2022, 1, 1, 1, 1))
-                .endDt(LocalDateTime.of(2022, 12, 31, 1, 1, 1))
-                .tnaTy(TnaType.ABSENCE_WITHOUT_LEAVE)
+                .targetStartDt(LocalDateTime.of(2022, 1, 1, 1, 1))
+                .targetEndDt(LocalDateTime.of(2022, 12, 31, 1, 1, 1))
+                .tnaType(TnaType.ABSENCE_WITHOUT_LEAVE)
                 .build();
-        Set<LocalDate> set = tnaService.toSetAllDates(request);
+        Set<LocalDate> set = tnaService.toSetAllDates(condition);
         log.debug("setDates: {}", set);
 
         assertFalse(set.isEmpty());
