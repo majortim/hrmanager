@@ -8,7 +8,7 @@ import kr.co.hrmanager.domain.jobs.Jobs;
 import kr.co.hrmanager.domain.jobs.JobsRepository;
 import kr.co.hrmanager.domain.users.Users;
 import kr.co.hrmanager.domain.users.UsersRepository;
-import kr.co.hrmanager.web.dto.employees.CreateEmployeeRequest;
+import kr.co.hrmanager.dto.employees.CreateEmployeeRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;

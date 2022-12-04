@@ -1,7 +1,7 @@
 package kr.co.hrmanager.service.jobs;
 
 import kr.co.hrmanager.domain.jobs.Jobs;
-import kr.co.hrmanager.web.dto.jobs.JobsSaveRequest;
+import kr.co.hrmanager.dto.jobs.JobsSaveRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

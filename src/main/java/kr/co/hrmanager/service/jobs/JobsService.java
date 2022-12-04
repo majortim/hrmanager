@@ -2,7 +2,7 @@ package kr.co.hrmanager.service.jobs;
 
 import kr.co.hrmanager.domain.jobs.Jobs;
 import kr.co.hrmanager.domain.jobs.JobsRepository;
-import kr.co.hrmanager.web.dto.jobs.JobsSaveRequest;
+import kr.co.hrmanager.dto.jobs.JobsSaveRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
