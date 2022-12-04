@@ -2,8 +2,8 @@ package kr.co.hrmanager.service.integration;
 
 import kr.co.hrmanager.service.leaves.LeavesService;
 import kr.co.hrmanager.service.nwd.NonWorkingDaysCalendarService;
-import kr.co.hrmanager.web.dto.leaves.CreateAnnualRequest;
-import kr.co.hrmanager.web.dto.nwd.CalendarCreateRequest;
+import kr.co.hrmanager.dto.leaves.CreateAnnualRequest;
+import kr.co.hrmanager.dto.nwd.CalendarCreateRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

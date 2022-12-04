@@ -1,8 +1,8 @@
 package kr.co.hrmanager.service.nwd;
 
 import kr.co.hrmanager.domain.nwd.*;
-import kr.co.hrmanager.web.dto.nwd.CalendarCreateRequest;
-import kr.co.hrmanager.web.dto.nwd.CalendarFindRequest;
+import kr.co.hrmanager.dto.nwd.CalendarCreateRequest;
+import kr.co.hrmanager.dto.nwd.CalendarFindRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.time4j.PlainDate;
