@@ -74,11 +74,11 @@ public class NonWorkingDaysCalendarService {
                 for(int i = 0; i < cnt; i++) {
                     int plusNumber = offset + i;
                     if(plusNumber != 0) {
-                        LocalDate addionalDate = nwdDate.plusDays(plusNumber);
+                        LocalDate additionalDate = nwdDate.plusDays(plusNumber);
                         NonWorkingDaysCalendar childCalendarDate = NonWorkingDaysCalendar.builder()
                                 .parentNwd(calendarDate)
                                 .annual(itemAnnual)
-                                .nwdDate(addionalDate)
+                                .nwdDate(additionalDate)
                                 .enabled(true)
                                 .build();
 

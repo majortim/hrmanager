@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class NonWorkingDaysLeavesServiceTest {
@@ -17,6 +18,7 @@ public class NonWorkingDaysLeavesServiceTest {
     LeavesService leavesService;
 
     @Test
+    @Transactional
     @Sql({
             "/sql/data/employees.sql"
             , "/sql/data/nwd_annual.sql"
