@@ -9,16 +9,21 @@ import kr.co.hrmanager.domain.tna.TnaRepository;
 import kr.co.hrmanager.domain.tna.TnaType;
 import kr.co.hrmanager.domain.users.Users;
 import kr.co.hrmanager.dto.leaves.CreateAnnualRequest;
+import kr.co.hrmanager.dto.nwd.CalendarDateResponse;
 import kr.co.hrmanager.dto.tna.FindTnaCondition;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -48,13 +53,21 @@ public class LeavesService {
         Integer baseYear = Optional.of(createRequest.getBaseYear()).orElseThrow(() -> new NoSuchElementException("기준연도가 지정되지 않았습니다."));
         LocalDateTime hireDt = Optional.of(employee.getHireDt()).orElseThrow(() -> new NoSuchElementException("채용일시가 지정되지 않았습니다."));
 
-        LocalDateTime targetStartDt = LocalDateTime.of(baseYear, hireDt.getMonth(), hireDt.getDayOfMonth(), 0, 0).minusYears(1);
-        LocalDateTime targetEndDt = targetStartDt.plusYears(1).plusDays(1).minusNanos(1);
+        final LocalDateTime targetStartDt = LocalDateTime.of(baseYear, hireDt.getMonth(), hireDt.getDayOfMonth(), 0, 0).minusYears(1);
+        final LocalDateTime targetEndDt = targetStartDt.plusYears(1).plusDays(1).minusNanos(1);
+        final LocalDate targetStartDate = targetStartDt.toLocalDate();
+        final LocalDate targetEndDate = targetEndDt.toLocalDate();
 
         //기준일 카운트, 기본 365일
         long daysBetweenDates = DAYS.between(targetStartDt, targetEndDt);
         //휴일, 휴무일
-        long nonWorkingDays = nonWorkingDaysCalendarRepository.countByEnabledAndNwdDateBetween(true, targetStartDt.toLocalDate(), targetEndDt.toLocalDate());
+        List<LocalDate> nonWorkingDaysList =
+                nonWorkingDaysCalendarRepository.findNwdDateByEnabledAndNwdDateBetween(true, targetStartDt.toLocalDate(), targetEndDt.toLocalDate())
+                .stream().map(CalendarDateResponse::getNwdDate).collect(Collectors.toList());
+        long nonWorkingDays = nonWorkingDaysList.size();
+        log.debug("nonWorkingDaysList: {}", nonWorkingDaysList);
+        log.debug("nonWorkingDays: {}", nonWorkingDays);
+
         //소정근로일
         long prescribedWorkingDays = daysBetweenDates - nonWorkingDays;
         //연차 계산할 때 출근한 것으로 계산하지 않는 휴가/휴직, 결근, 정직
@@ -68,8 +81,11 @@ public class LeavesService {
                 .targetStartDt(targetStartDt)
                 .targetEndDt(targetEndDt)
                 .build();
-        long countWithoutLeave
-                = tnaRepository.countByCondition(conditionWithoutLeave);
+
+        Set<LocalDate> awlLocalDateSet =  tnaRepository.streamByCondition(conditionWithoutLeave)
+                .flatMap(tna -> tna.toSetAllDates(targetStartDate, targetEndDate).stream()).collect(Collectors.toSet());
+        nonWorkingDaysList.forEach(awlLocalDateSet::remove);
+        long countWithoutLeave = awlLocalDateSet.size();
 
         //개인 사유로 인한 휴직
         FindTnaCondition conditionPersonal
@@ -80,7 +96,11 @@ public class LeavesService {
                 .targetStartDt(targetStartDt)
                 .targetEndDt(targetEndDt)
                 .build();
-        long countPersonal = tnaRepository.countByCondition(conditionPersonal);
+
+        Set<LocalDate> personalLocalDateSet =  tnaRepository.streamByCondition(conditionPersonal)
+                .flatMap(tna -> tna.toSetAllDates(targetStartDate, targetEndDate).stream()).collect(Collectors.toSet());
+        nonWorkingDaysList.forEach(personalLocalDateSet::remove);
+        long countPersonal = personalLocalDateSet.size();
 
         //정직
         Stream<EmployeeStatus> streamSuspended
@@ -120,8 +140,10 @@ public class LeavesService {
             return repository.save(leave);
         }
         else {
-            //TODO
             log.debug("80% 미만");
+            Set<LocalDate> prescriedWorkingDaysSet = targetStartDate.datesUntil(targetEndDate.plusDays(1))
+                    .collect(Collectors.toSet());
+            nonWorkingDaysList.forEach(prescriedWorkingDaysSet::remove);
         }
 
         return null;
