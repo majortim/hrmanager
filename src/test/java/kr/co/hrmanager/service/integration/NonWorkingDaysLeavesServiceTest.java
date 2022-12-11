@@ -1,14 +1,13 @@
 package kr.co.hrmanager.service.integration;
 
-import kr.co.hrmanager.service.leaves.LeavesService;
-import kr.co.hrmanager.service.nwd.NonWorkingDaysCalendarService;
 import kr.co.hrmanager.dto.leaves.CreateAnnualRequest;
 import kr.co.hrmanager.dto.nwd.CalendarCreateRequest;
+import kr.co.hrmanager.service.leaves.LeavesService;
+import kr.co.hrmanager.service.nwd.NonWorkingDaysCalendarService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class NonWorkingDaysLeavesServiceTest {
@@ -18,7 +17,6 @@ public class NonWorkingDaysLeavesServiceTest {
     LeavesService leavesService;
 
     @Test
-    @Transactional
     @Sql({
             "/sql/data/employees.sql"
             , "/sql/data/nwd_annual.sql"

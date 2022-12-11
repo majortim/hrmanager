@@ -11,11 +11,9 @@ CREATE TABLE IF NOT EXISTS non_working_days_calendar (
 
 TRUNCATE TABLE non_working_days_calendar;
 
-INSERT INTO non_working_days_calendar(nwd_id,
-                                      annual_id,
+INSERT INTO non_working_days_calendar(annual_id,
                                       nwd_date,
                                     enabled)
-VALUES (1,
-        4,
+VALUES (4,
         '2022-03-01',
         TRUE);
