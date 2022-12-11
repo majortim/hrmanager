@@ -14,6 +14,7 @@ TRUNCATE TABLE non_working_days_calendar;
 INSERT INTO non_working_days_calendar(annual_id,
                                       nwd_date,
                                     enabled)
-VALUES (4,
+VALUES (
+        (SELECT annual_id FROM non_working_days_annual WHERE "month" = 3 AND day_of_month = 1),
         '2022-03-01',
         TRUE);
