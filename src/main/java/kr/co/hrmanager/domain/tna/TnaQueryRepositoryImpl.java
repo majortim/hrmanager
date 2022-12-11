@@ -1,10 +1,12 @@
 package kr.co.hrmanager.domain.tna;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.hrmanager.domain.leaves.LeaveType;
 import kr.co.hrmanager.dto.tna.FindTnaCondition;
+import kr.co.hrmanager.dto.tna.TnaDateResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -30,6 +32,11 @@ public class TnaQueryRepositoryImpl implements TnaQueryRepository {
     public List<Tna> listByCondition(FindTnaCondition condition) {
         return queryByCondition(jpaQueryFactory.selectFrom(tna), condition)
                 .fetch();
+    }
+
+    public Stream<TnaDateResponse> streamTnaDateResponseByCondition(FindTnaCondition condition) {
+        return queryByCondition(jpaQueryFactory.select(Projections.constructor(TnaDateResponse.class, tna.startDt, tna.endDt)).from(tna), condition)
+                .stream();
     }
 
     @Override

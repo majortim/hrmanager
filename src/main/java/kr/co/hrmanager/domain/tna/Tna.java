@@ -5,8 +5,11 @@ import kr.co.hrmanager.domain.leaves.LeaveType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -39,5 +42,15 @@ public class Tna {
     @Override
     public int hashCode() {
         return Objects.hashCode(tnaId);
+    }
+
+    public Set<LocalDate> toSetAllDates(LocalDate targetStartDate, LocalDate targetEndDate) {
+        final LocalDate tnaStartDate = this.startDt.toLocalDate();
+        final LocalDate tnaEndDate = this.endDt.toLocalDate();
+
+        LocalDate startDate = tnaStartDate.isAfter(targetStartDate) ? tnaStartDate : targetStartDate;
+        LocalDate endDate = tnaEndDate.isBefore(targetEndDate) ? tnaEndDate : targetEndDate;
+
+        return startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toSet());
     }
 }
