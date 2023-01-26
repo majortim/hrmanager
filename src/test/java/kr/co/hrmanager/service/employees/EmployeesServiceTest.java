@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -48,6 +49,7 @@ class EmployeesServiceTest {
     }
 
     @Test
+    @Transactional
     @Sql({
               "/sql/data/departments.sql"
             , "/sql/data/employees.sql"

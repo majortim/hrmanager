@@ -29,11 +29,11 @@ class TnaEmployeesIntegrationTest {
     EmployeesRepository employeesRepository;
 
     @Test
+    @Transactional(readOnly = true)
     @Sql({
             "/sql/data/employees.sql"
             , "/sql/data/tna.sql"
     })
-    @Transactional(readOnly = true)
     void streamByEmployeeAndTnaTypeListAndDateTime() {
         FindTnaCondition condition = createCondition();
 
@@ -43,16 +43,16 @@ class TnaEmployeesIntegrationTest {
         assertFalse(list.isEmpty());
     }
 
-    private FindTnaCondition createCondition() {
+    FindTnaCondition createCondition() {
         return  FindTnaCondition.builder()
                 .username("admin")
-                .targetStartDt(LocalDateTime.of(2022, 1, 1, 1, 1))
-                .targetEndDt(LocalDateTime.of(2022, 12, 31, 1, 1, 1))
+                .targetStartDt(LocalDateTime.of(2021, 1, 1, 1, 1))
+                .targetEndDt(LocalDateTime.of(2021, 12, 31, 1, 1, 1))
                 .tnaType(TnaType.ABSENCE_WITHOUT_LEAVE)
                 .build();
     }
 
-    private Stream<Tna> createStream(FindTnaCondition condition) {
+    Stream<Tna> createStream(FindTnaCondition condition) {
 
         return tnaRepository.streamByCondition(condition);
     }
