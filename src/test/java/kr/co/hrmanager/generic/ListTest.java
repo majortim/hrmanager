@@ -1,5 +1,6 @@
 package kr.co.hrmanager.generic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Slf4j
 public class ListTest {
 
     @Test
@@ -18,6 +20,7 @@ public class ListTest {
         List<LocalDate> listTarget = List.of(LocalDate.of(2022, 1, 1), LocalDate.of(2022, 1, 3));
 
         listSource.removeAll(listTarget);
+        log.debug("listSource: {}", listSource);
 
         assertEquals(listSource.size(), 1);
     }
