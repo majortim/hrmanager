@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +21,7 @@ class NonWorkingDaysCalendarRepositoryTest {
     NonWorkingDaysCalendarRepository repository;
 
     @Test
+    @Transactional
     void countByEnabledAndNwdDateBetween() {
         Boolean enabled = true;
         LocalDateTime targetStartDt = LocalDateTime.of(2022, 3, 1, 1, 1);
@@ -31,6 +33,7 @@ class NonWorkingDaysCalendarRepositoryTest {
     }
 
     @Test
+    @Transactional
     @Sql({
             "/sql/data/nwd_annual.sql",
             "/sql/data/nwd_calendar.sql"

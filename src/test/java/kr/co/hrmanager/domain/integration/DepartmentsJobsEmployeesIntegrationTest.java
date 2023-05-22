@@ -6,7 +6,6 @@ import kr.co.hrmanager.domain.employees.Employees;
 import kr.co.hrmanager.domain.employees.EmployeesRepository;
 import kr.co.hrmanager.domain.jobs.Jobs;
 import kr.co.hrmanager.domain.jobs.JobsRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,15 +25,10 @@ public class DepartmentsJobsEmployeesIntegrationTest {
     @Autowired
     EmployeesRepository employeesRepository;
 
-    @AfterEach
-    void cleanup() {
-        departmentsRepository.deleteAll();
-        jobsRepository.deleteAll();
-        employeesRepository.deleteAll();
-    }
-    @Transactional
     @Test
-    void saveDepartmentsAndJobsAndEmployees(){
+    @Transactional
+        //트랜잭션 관련 에러 나던 메서드
+    void saveDepartmentsAndJobsAndEmployees() {
         saveDepartments();
         saveJobs();
 
@@ -48,7 +42,8 @@ public class DepartmentsJobsEmployeesIntegrationTest {
         assertNotNull(employee);
     }
 
-    private void saveDepartments() {
+    @Transactional
+    void saveDepartments() {
         Long deptId = 1L;
         String deptName = "경영지원팀";
 
@@ -58,7 +53,8 @@ public class DepartmentsJobsEmployeesIntegrationTest {
                 .build());
     }
 
-    private void saveJobs() {
+    @Transactional
+    void saveJobs() {
         Long jobId = 1L;
         String jobTitle = "대리";
 
@@ -68,7 +64,8 @@ public class DepartmentsJobsEmployeesIntegrationTest {
                 .build());
     }
 
-    private void saveEmployees(Departments dept, Jobs job) {
+    @Transactional
+    void saveEmployees(Departments dept, Jobs job) {
         String empName = "홍길동";
 
         employeesRepository.save(Employees.builder()

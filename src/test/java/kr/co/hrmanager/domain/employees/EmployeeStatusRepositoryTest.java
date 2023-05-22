@@ -24,6 +24,7 @@ public class EmployeeStatusRepositoryTest {
     @Autowired EmployeeStatusRepository repository;
 
     @Test
+    @Transactional
     void saveRetired() {
         //given
         Employees employee = Employees.builder()

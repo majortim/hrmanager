@@ -20,17 +20,18 @@ class JobsServiceTest {
     JobsService jobsService;
 
     @Test
+    @Transactional
     void save() {
 
-        Long savedId = saveCommon();
+        Long savedId = saveJob();
 
         assertEquals(1L, savedId);
     }
 
-    @Transactional
     @Test
+    @Transactional
     void saveAndUpdate() {
-        Long savedId = saveCommon();
+        Long savedId = saveJob();
 
         Optional<Jobs> foundJob = jobsService.findById(savedId);
 
@@ -41,7 +42,8 @@ class JobsServiceTest {
 
     }
 
-    private Long saveCommon() {
+    @Transactional
+    Long saveJob() {
         JobsSaveRequest request = JobsSaveRequest.builder()
                 .jobId(1L)
                 .jobTitle("개발자")

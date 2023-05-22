@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -18,6 +19,7 @@ public class LeavesRepositoryTest {
     EmployeesRepository employeesRepository;
 
     @Test
+    @Transactional
     @Sql("/sql/data/employees.sql")
     void save() {
         Employees employee = employeesRepository.findByEmpName("관리자").orElseThrow();

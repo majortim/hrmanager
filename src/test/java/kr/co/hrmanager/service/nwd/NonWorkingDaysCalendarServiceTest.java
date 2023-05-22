@@ -21,6 +21,7 @@ class NonWorkingDaysCalendarServiceTest {
     NonWorkingDaysCalendarService nonWorkingDaysCalendarService;
 
     @Test
+    @Transactional
     @Sql({
             "/sql/data/nwd_annual.sql"
             , "/sql/data/nwd_weekly.sql"
@@ -34,11 +35,11 @@ class NonWorkingDaysCalendarServiceTest {
     }
 
     @Test
+    @Transactional
     @Sql({
             "/sql/data/nwd_annual.sql"
             , "/sql/data/nwd_weekly.sql"
     })
-    @Transactional
     public void createAndFind() {
         CalendarCreateRequest createRequest = CalendarCreateRequest.of(2022);
         CalendarFindRequest findRequest = CalendarFindRequest.of(2022);

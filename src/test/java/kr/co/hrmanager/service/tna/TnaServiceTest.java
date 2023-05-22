@@ -33,8 +33,8 @@ class TnaServiceTest {
     void toSetAllDates() {
         FindTnaCondition condition = FindTnaCondition.builder()
                 .username("admin")
-                .targetStartDt(LocalDateTime.of(2022, 1, 1, 1, 1))
-                .targetEndDt(LocalDateTime.of(2022, 12, 31, 1, 1, 1))
+                .targetStartDt(LocalDateTime.of(2021, 1, 1, 1, 1))
+                .targetEndDt(LocalDateTime.of(2021, 12, 31, 1, 1, 1))
                 .tnaType(TnaType.ABSENCE_WITHOUT_LEAVE)
                 .build();
         Set<LocalDate> set = tnaService.toSetAllDates(condition);
