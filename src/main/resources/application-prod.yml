@@ -1,8 +1,6 @@
 server:
-  port: 8443
+  port: ${hrmanager.server.port}
   ssl:
     certificate: ${hrmanager.keystore.certificate}
     certificate-private-key: ${hrmanager.keystore.private-key}
-logging:
-   file:
-      name: ${hrmanager.logging.file}
+logging.file.name: ${hrmanager.logging.file}
