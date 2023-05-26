@@ -23,7 +23,7 @@ public class SecurityConfig {
         // @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .mvcMatchers("/", "/login", "/signup", "health").permitAll()
+                        .mvcMatchers("/", "/login", "/signup", "/health").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf((csrf) -> csrf
