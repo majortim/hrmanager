@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .ignoringAntMatchers("/")
                         .ignoringAntMatchers("/login")
                         .ignoringAntMatchers("/signup")
-                        .ignoringAntMatchers("/h2-console/**")
+                        .ignoringAntMatchers("/h2-console/*")
                         .disable()
                 )
                 .headers().frameOptions().sameOrigin().and()

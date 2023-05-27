@@ -1,7 +1,3 @@
 server:
   port: ${hrmanager.server.port}
-#  ssl:
-#    certificate: ${hrmanager.keystore.certificate}
-#    certificate-private-key: ${hrmanager.keystore.private-key}
-#    trust-certificate: ${hrmanager.keystore.trust-certificate}
 logging.file.name: ${hrmanager.logging.file}
