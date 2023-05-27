@@ -23,14 +23,15 @@ public class SecurityConfig {
         // @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .mvcMatchers("/", "/login", "/signup", "/health").permitAll()
+                        .mvcMatchers("/", "/login", "/signup").permitAll()
+                        .antMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf((csrf) -> csrf
                         .ignoringAntMatchers("/")
                         .ignoringAntMatchers("/login")
                         .ignoringAntMatchers("/signup")
-                        .ignoringAntMatchers("/h2-console/*")
+                        .ignoringAntMatchers("/h2-console/**")
                         .disable()
                 )
                 .headers().frameOptions().sameOrigin().and()
