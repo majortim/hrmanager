@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .mvcMatchers("/", "/login", "/signup").permitAll()
-                        .antMatchers("/actuator/**").permitAll()
+                        .antMatchers("/swagger-ui.html", "/v?/api-doc", "/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf((csrf) -> csrf
