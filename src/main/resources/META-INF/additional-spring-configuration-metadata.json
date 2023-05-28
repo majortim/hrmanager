@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "api.version",
+      "type": "java.lang.String",
+      "description": "API 버전."
+    },
+    {
+      "name": "api.description",
+      "type": "java.lang.String",
+      "description": "API 설명."
+    },
+    {
+      "name": "api.server.url",
+      "type": "java.lang.String",
+      "description": "API 서버 주소."
+    }
+  ] }

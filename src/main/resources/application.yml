@@ -54,3 +54,8 @@ jwt:
 
 server:
   port: 8090
+
+api:
+  version: 1.0
+  description: Admin API
+  server.url: https://hrmanager.co.kr

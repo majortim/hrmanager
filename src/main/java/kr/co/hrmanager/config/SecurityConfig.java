@@ -24,7 +24,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .mvcMatchers("/", "/login", "/signup").permitAll()
-                        .antMatchers("/swagger-ui.html", "/v?/api-doc", "/actuator/**").permitAll()
+                        .antMatchers(authorizeSwaggerPatterns()).permitAll()
+                        .antMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf((csrf) -> csrf
@@ -58,5 +59,13 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    private String[] authorizeSwaggerPatterns() {
+        return new String[]{
+                "/swagger-ui.html"
+                , "/swagger-ui/**"
+                , "/v?/api-docs/**"
+        };
     }
 }
