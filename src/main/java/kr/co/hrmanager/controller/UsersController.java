@@ -3,12 +3,12 @@ package kr.co.hrmanager.controller;
 
 import kr.co.hrmanager.auth.PrincipalUser;
 import kr.co.hrmanager.domain.users.Users;
-import kr.co.hrmanager.service.auth.JwtService;
-import kr.co.hrmanager.service.users.UsersService;
 import kr.co.hrmanager.dto.common.PostSuccessResponse;
 import kr.co.hrmanager.dto.users.LoginRequest;
 import kr.co.hrmanager.dto.users.LoginResponse;
 import kr.co.hrmanager.dto.users.SignUpRequest;
+import kr.co.hrmanager.service.auth.JwtService;
+import kr.co.hrmanager.service.users.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Objects;
-
 
 @Slf4j
 @RequiredArgsConstructor
@@ -68,7 +67,7 @@ public class UsersController {
     }
 
     /**
-     *  테스트용 메서드
+     * 테스트용 메서드
      **/
     @GetMapping("/authorities")
     public Collection<? extends GrantedAuthority> authorities(@PrincipalUser Users user) {

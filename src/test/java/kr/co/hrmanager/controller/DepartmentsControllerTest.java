@@ -72,7 +72,7 @@ public class DepartmentsControllerTest {
             LoginResponse loginResponse = Optional.of(objectMapper.readValue(responseText, LoginResponse.class)).orElseThrow();
 
             ResultActions actions = this.mockMvc.perform(
-                    post("/api/dept/save")
+                    post("/departments")
                             .header("Authorization", "Bearer " + loginResponse.getToken())
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(content)

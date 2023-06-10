@@ -6,22 +6,20 @@ import kr.co.hrmanager.dto.employees.CreateEmployeeRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/employees")
 public class EmployeesController {
 
     private final EmployeesService employeesService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/create")
+    @PostMapping
     public PostSuccessResponse create(@Valid @RequestBody CreateEmployeeRequest request) {
 
         employeesService.create(request);
