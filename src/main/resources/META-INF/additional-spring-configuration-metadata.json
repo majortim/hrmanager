@@ -14,5 +14,10 @@
       "name": "api.server.url",
       "type": "java.lang.String",
       "description": "API 서버 주소."
+    },
+    {
+      "name": "api.server.description",
+      "type": "java.lang.String",
+      "description": "API 서버 설명."
     }
   ] }

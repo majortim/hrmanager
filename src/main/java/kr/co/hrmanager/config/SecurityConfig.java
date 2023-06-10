@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .mvcMatchers("/", "/login", "/signup").permitAll()
-                        .antMatchers(authorizeSwaggerPatterns()).permitAll()
+                        .antMatchers(getSwaggerPatterns()).permitAll()
                         .antMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .ignoringAntMatchers("/login")
                         .ignoringAntMatchers("/signup")
                         .ignoringAntMatchers("/h2-console/**")
+                        .ignoringAntMatchers(getSwaggerPatterns())
                         .disable()
                 )
                 .headers().frameOptions().sameOrigin().and()
@@ -61,7 +62,7 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    private String[] authorizeSwaggerPatterns() {
+    private String[] getSwaggerPatterns() {
         return new String[]{
                 "/swagger-ui.html"
                 , "/swagger-ui/**"

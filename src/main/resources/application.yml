@@ -58,4 +58,6 @@ server:
 api:
   version: 1.0
   description: Admin API
-  server.url: https://hrmanager.co.kr
+  server:
+    url: http://localhost:${server.port}
+    description: Local

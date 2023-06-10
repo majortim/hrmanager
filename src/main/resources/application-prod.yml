@@ -1,3 +1,8 @@
 server:
   port: ${hrmanager.server.port}
 logging.file.name: ${hrmanager.logging.file}
+
+api:
+  server:
+    url: https://hrmanager.co.kr
+    description: Production
