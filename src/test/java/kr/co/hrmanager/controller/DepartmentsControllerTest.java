@@ -5,7 +5,6 @@ import kr.co.hrmanager.domain.departments.Departments;
 import kr.co.hrmanager.domain.departments.DepartmentsRepository;
 import kr.co.hrmanager.dto.departments.DepartmentsSaveRequest;
 import kr.co.hrmanager.dto.users.LoginRequest;
-import kr.co.hrmanager.dto.users.LoginResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -43,7 +41,7 @@ public class DepartmentsControllerTest {
 
 
     @Test
-    public void saveTest(){
+    public void saveTest() {
         Long deptId = 1L;
         String deptName = "경영지원팀";
 
@@ -61,19 +59,15 @@ public class DepartmentsControllerTest {
             String loginRequestAsString = objectMapper.writeValueAsString(loginRequest);
             String content = objectMapper.writeValueAsString(request);
 
-            String responseText = this.mockMvc.perform(
+            String token = this.mockMvc.perform(
                     post("/login")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(loginRequestAsString)
             ).andReturn().getResponse().getContentAsString();
 
-            log.debug("response: {}", responseText);
-
-            LoginResponse loginResponse = Optional.of(objectMapper.readValue(responseText, LoginResponse.class)).orElseThrow();
-
             ResultActions actions = this.mockMvc.perform(
                     post("/departments")
-                            .header("Authorization", "Bearer " + loginResponse.getToken())
+                            .header("Authorization", "Bearer " + token)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(content)
 //                            .accept(MediaType.APPLICATION_JSON)

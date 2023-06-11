@@ -1,11 +1,9 @@
 package kr.co.hrmanager.controller;
 
-
 import kr.co.hrmanager.auth.PrincipalUser;
 import kr.co.hrmanager.domain.users.Users;
 import kr.co.hrmanager.dto.common.PostSuccessResponse;
 import kr.co.hrmanager.dto.users.LoginRequest;
-import kr.co.hrmanager.dto.users.LoginResponse;
 import kr.co.hrmanager.dto.users.SignUpRequest;
 import kr.co.hrmanager.service.auth.JwtService;
 import kr.co.hrmanager.service.users.UsersService;
@@ -48,7 +46,7 @@ public class UsersController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+    public String login(@Valid @RequestBody LoginRequest request) {
         try {
 
             //SecurityContext context = SecurityContextHolder.createEmptyContext();
@@ -59,7 +57,7 @@ public class UsersController {
             log.debug("authentication: {}", authentication);
             log.debug("token: {}", authentication != null ? jwtService.getToken(authentication) : "");
 
-            return new LoginResponse(jwtService.getToken(Objects.requireNonNull(authentication)));
+            return jwtService.getToken(Objects.requireNonNull(authentication));
         } catch (AuthenticationException e) {
             log.error("인증 실패", e);
             throw e;

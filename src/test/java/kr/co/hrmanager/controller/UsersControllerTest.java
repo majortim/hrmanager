@@ -2,7 +2,6 @@ package kr.co.hrmanager.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.hrmanager.dto.users.LoginRequest;
-import kr.co.hrmanager.dto.users.LoginResponse;
 import kr.co.hrmanager.dto.users.SignUpRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -62,17 +61,14 @@ class UsersControllerTest {
 
         ResultActions loginResultActions = requestLogin(loginRequest);
 
-        String loginResponseText
+        String token
                 = Optional.of(loginResultActions.andReturn().getResponse().getContentAsString())
                             .orElseThrow(()-> new RuntimeException("로그인 실패.."));
 
-        log.debug("response: {}", loginResponseText);
-
-        LoginResponse loginResponse = Optional.of(objectMapper.readValue(loginResponseText, LoginResponse.class)).orElseThrow();
 
         ResultActions authoritiesResultActions = this.mockMvc.perform(
                 get("/authorities")
-                        .header("Authorization", "Bearer " + loginResponse.getToken())
+                        .header("Authorization", "Bearer " + token)
 //                            .accept(MediaType.APPLICATION_JSON)
         );
 
