@@ -34,8 +34,8 @@ spring:
       enabled: DETECT
 logging:
   pattern:
-    console: "%d %-5level %logger : %msg %X{traceId:- }%n"
-    file: "%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx} %X{traceId:- }"
+    console: "%d [%-5level] [%X{traceId:--}] %logger : %msg%n"
+    file: "%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}} [${LOG_LEVEL_PATTERN:-%5p}] ${PID:- } [%X{traceId:--}]  --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
   level:
     root: ERROR
     org.gradle: ERROR
