@@ -19,6 +19,9 @@ public class LoggingConfig {
     public CommonsRequestLoggingFilter loggingFilter() {
         CommonsRequestLoggingFilter filter
                 = new CommonsRequestLoggingFilter() {
+            @Override
+            protected void beforeRequest(HttpServletRequest request, String message) {
+            }
 
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
