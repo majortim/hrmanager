@@ -34,17 +34,17 @@ spring:
       enabled: DETECT
 logging:
   pattern:
-    console: "%d [%-5level] [%X{traceId:--}] %logger : %msg%n"
-    file: "%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}} [${LOG_LEVEL_PATTERN:-%5p}] ${PID:- } [%X{traceId:--}]  --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    console: "[%level] %d [U:%X{traceId:--}] %logger : %msg%n"
+    file: "[%level] %d [P:${PID:- }] [U:%X{traceId:--}] [T:%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
   level:
     root: ERROR
     org.gradle: ERROR
 #    java.sql: DEBUG
     org:
 #      gradle: ERROR
-      springframework:
-        web:
-          servlet.DispatcherServlet: DEBUG
+#      springframework:
+#        web:
+#          servlet.DispatcherServlet: DEBUG
 #      hibernate:
 #        type: TRACE
     kr.co.hrmanager: DEBUG
