@@ -25,9 +25,11 @@ public class LoggingConfig {
 
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+                MDC.put("sessionId", request.getSession().getId());
                 MDC.put("traceId", UUID.randomUUID().toString());
                 super.doFilterInternal(request, response, filterChain);
-                MDC.remove("traceId");
+                MDC.clear();
             }
         };
         filter.setIncludeQueryString(true);
