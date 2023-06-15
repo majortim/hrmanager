@@ -34,8 +34,8 @@ spring:
       enabled: DETECT
 logging:
   pattern:
-    console: "[%level] %d [U:%X{traceId:--}] %logger : %msg%n"
-    file: "[%level] %d [P:${PID:- }] [T:%t] [S:%sessionID] [R:%X{traceId:--}] %logger : %m%n"
+    console: "[%level] %d [S:%X{sessionId}] [R:%X{traceId:--}] %logger : %msg%n"
+    file: "[%level] %d [P:${PID:- }] [T:%t] [S:%X{sessionId}] [R:%X{traceId:--}] %logger : %m%n"
   level:
     root: ERROR
     org.gradle: ERROR
