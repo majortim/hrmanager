@@ -35,7 +35,7 @@ spring:
 logging:
   pattern:
     console: "[%level] %d [U:%X{traceId:--}] %logger : %msg%n"
-    file: "[%level] %d [P:${PID:- }] [U:%X{traceId:--}] [T:%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    file: "[%level] %d [P:${PID:- }] [U:%X{traceId:--}] [T:%t] %-40.40logger{39} : %m%n"
   level:
     root: ERROR
     org.gradle: ERROR
