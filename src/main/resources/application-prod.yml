@@ -2,6 +2,12 @@ server:
   port: ${hrmanager.server.port}
 logging.file.name: ${hrmanager.logging.file}
 
+spring:
+  datasource:
+    url: ${hrmanager.datasource.url}
+    username: ${hrmanager.datasource.username}
+    password: ${hrmanager.datasource.password}
+
 api:
   server:
     url: https://hrmanager.co.kr
