@@ -1,0 +1,13 @@
+server:
+  port: ${hrmanager.server.port}
+
+spring:
+  datasource:
+    url: ${hrmanager.datasource.url}
+    username: ${hrmanager.datasource.username}
+    password: ${hrmanager.datasource.password}
+
+api:
+  server:
+    url: http://localhost:${hrmanager.server.port}
+    description: Local
