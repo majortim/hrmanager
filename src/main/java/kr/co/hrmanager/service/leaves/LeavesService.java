@@ -34,14 +34,14 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @Slf4j
 public class LeavesService {
     private static final long DEFAULT_ANNUAL_LEAVES = 15;
-    private final LeavesRepository repository;
+    private final LeavesRepository leavesRepository;
     private final EmployeesRepository employeesRepository;
     private final EmployeeStatusRepository employeeStatusRepository;
     private final NonWorkingDaysCalendarRepository nonWorkingDaysCalendarRepository;
     private final TnaRepository tnaRepository;
 
     public Optional<Leaves> findById(Long id) {
-        return repository.findById(id);
+        return leavesRepository.findById(id);
     }
 
     @Transactional
@@ -137,7 +137,7 @@ public class LeavesService {
                     .enabled(true)
                     .build();
 
-            return repository.save(leave);
+            return leavesRepository.save(leave);
         }
         else {
             log.debug("80% 미만");
@@ -147,5 +147,10 @@ public class LeavesService {
         }
 
         return null;
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        leavesRepository.deleteById(id);
     }
 }

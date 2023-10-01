@@ -33,6 +33,11 @@ public class TnaController {
         return buildTnaResponse(tna);
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        tnaService.deleteById(id);
+    }
+
     private TnaResponse buildTnaResponse(Tna tna) {
         return TnaResponse.builder()
                 .tnaId(tna.getTnaId())

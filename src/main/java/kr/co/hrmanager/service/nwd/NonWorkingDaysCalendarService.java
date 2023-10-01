@@ -115,4 +115,9 @@ public class NonWorkingDaysCalendarService {
         repository.saveAll(listCalendar);
         return true;
     }
+
+    @Transactional
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 }

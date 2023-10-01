@@ -25,4 +25,9 @@ public class NonWorkingDaysCalendarController {
     public PostSuccessResponse create(@RequestBody CalendarCreateRequest request) {
         return new PostSuccessResponse(String.format("%s", nonWorkingDaysCalendarService.create(request)));
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        nonWorkingDaysCalendarService.deleteById(id);
+    }
 }

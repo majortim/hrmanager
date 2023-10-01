@@ -29,6 +29,7 @@ public class TnaService {
         return tnaRepository.findById(id);
     }
 
+    @Transactional
     public Tna create(CreateTnaRequest request) {
         LocalDateTime startDt = request.getStartDt();
         LocalDateTime endDt = request.getEndDt();
@@ -45,6 +46,11 @@ public class TnaService {
                 .endDt(endDt)
                 .build();
         return tnaRepository.save(tna);
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        tnaRepository.deleteById(id);
     }
 
     public Set<LocalDate> toSetAllDates(FindTnaCondition condition) {
