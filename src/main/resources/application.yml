@@ -27,6 +27,12 @@ spring:
   output:
     ansi:
       enabled: DETECT
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
 logging:
   pattern:
     console: "[%level] %d [S:%X{sessionId}] [R:%X{traceId:--}] %logger : %msg%n"

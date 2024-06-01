@@ -11,3 +11,8 @@ api:
   server:
     url: http://localhost:${hrmanager.server.port}
     description: Local
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.web: TRACE
